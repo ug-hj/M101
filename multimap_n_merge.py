@@ -55,6 +55,9 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir):
     cat_columns = Table.read(join(catalog_dir, random.choice(listdir(catalog_dir))), format='ascii', delimiter=',').columns
     assert (ra_col in cat_columns) and (dec_col in cat_columns), ("ra_col & dec_col must match RA & Dec column headers")
     
+    del cat_columns
+    gc.collect()
+    
     # define map resolution, create map of zeros
     assert hp.isnsideok(nside), ("nside must be a power of 2")
     npix = hp.nside2npix(nside)
