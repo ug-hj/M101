@@ -2,7 +2,7 @@
 #PBS -q smp
 #PBS -N pd_test
 #PBS -l nodes=1:ppn=1
-#PBS -l mem=200gb
+#PBS -l mem=100gb
 #PBS -l walltime=120:00:00
 #PBS -M zcaphjo@ucl.ac.uk
 #PBS -m bea
