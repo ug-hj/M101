@@ -1,5 +1,5 @@
 #!/bin/tcsh
-#PBS -q cores12
+#PBS -q compute
 #PBS -N pd_test
 #PBS -l nodes=1:ppn=1
 #PBS -l mem=48gb
