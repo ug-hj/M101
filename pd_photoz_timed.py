@@ -17,7 +17,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
         if cat.endswith(".csv"):
             # read catalog
             try:
-                c = pandas.read_csv(join(catalog_dir, cat), sep=',', low_memory=False, header=0, dtype={str(ra_col) : np.float64, str(dec_col) : np.float64})
+                c = pandas.read_csv(join(catalog_dir, cat), sep=',', low_memory=False, header=1, dtype={str(ra_col) : np.float64, str(dec_col) : np.float64})
                 ra = c.iloc[:, 1]
                 dec = c.iloc[:, 2]
             except:
