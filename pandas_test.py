@@ -34,4 +34,4 @@ hmap += cmap
 del c
 gc.collect()
 
-hp.write_map("/share/splinter/ug_hj/pd_testmap", hmap)
+hp.write_map("/share/splinter/ug_hj/pd_testmap.fits", hmap)
