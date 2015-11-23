@@ -5,7 +5,7 @@ import matplotlib
 import random
 from os.path import join, normpath, basename, isdir
 from os import listdir, mkdir
-from pandas
+import pandas
 import gc
 
 def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
