@@ -54,7 +54,7 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir):
     # check catalog_dir is a string
     assert isinstance(catalog_dir, basestring) == True, ("catalog_dir must be input as a string")
     
-    cat_columns = pandas.read_csv(join(catalog_dir, random.choice(listdir(catalog_dir))), sep=',', low_memory=False, header=0, dtype={str(ra_col) : np.float64, str(dec_col) : np.float64}).columns
+    cat_columns = pandas.read_csv(join(catalog_dir, random.choice(listdir(catalog_dir))), sep=',', low_memory=False, header=1, dtype={ra_col : np.float64, dec_col : np.float64}).columns
     assert (ra_col in cat_columns) and (dec_col in cat_columns), ("ra_col & dec_col must match RA & Dec column headers")
     
     del cat_columns
