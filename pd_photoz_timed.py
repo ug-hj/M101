@@ -17,14 +17,16 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
         if cat.endswith(".csv"):
             # read catalog
             try:
-            	c = Table.read(join(catalog_dir, cat), format='ascii', delimiter=',')
+                c = pandas.read_csv(join(catalog_dir, cat), sep=',', low_memory=False, skip_blank_lines=False, header=0, dtype={str(ra_col) : np.float64, str(dec_col) : np.float64})
+                ra = c.iloc[:, 1]
+                dec = c.iloc[:, 2]
             except:
             	pass
             
             # generate theta/phi vectors
             try:
-            	theta = np.deg2rad(90.0 - c[dec_col])
-            	phi = np.deg2rad(c[ra_col])
+            	theta = np.deg2rad(90.0 - dec)
+            	phi = np.deg2rad(ra)
             
             	# generate corresponding pixel_IDs
             	pix_IDs = hp.ang2pix(nside, theta, phi, nest=False)
@@ -52,7 +54,7 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir):
     # check catalog_dir is a string
     assert isinstance(catalog_dir, basestring) == True, ("catalog_dir must be input as a string")
     
-    cat_columns = Table.read(join(catalog_dir, random.choice(listdir(catalog_dir))), format='ascii', delimiter=',').columns
+    cat_columns = pandas.read_csv(join(catalog_dir, cat), sep=',', low_memory=False, skip_blank_lines=False, header=0, dtype={str(ra_col) : np.float64, str(dec_col) : np.float64}).columns
     assert (ra_col in cat_columns) and (dec_col in cat_columns), ("ra_col & dec_col must match RA & Dec column headers")
     
     del cat_columns
