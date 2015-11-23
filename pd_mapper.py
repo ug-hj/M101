@@ -20,7 +20,10 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
             	c = pandas.read_csv(join(catalog_dir, cat), sep=',', low_memory=False, header=0, dtype={ra_col : np.float64, dec_col : np.float64})
                 ra = c.loc[:, ra_col]
                 dec = c.loc[:, dec_col]
-            except: Exception, e: print(e)
+            except InconsistentTableError:
+            	pass
+            except:
+            	raise
             
             # generate theta/phi vectors
             try:
