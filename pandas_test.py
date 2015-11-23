@@ -14,8 +14,8 @@ npix = hp.nside2npix(nside)
 
 # read catalog
 c = pandas.read_csv(join("/share/data1/SDSS_DR12_Photometry", random.choice(listdir("/share/data1/SDSS_DR12_Photometry"))), sep=',', low_memory=False, header=0, dtype={'ra' : np.float64, 'dec' : np.float64})
-ra = c.iloc[:, 1]
-dec = c.iloc[:, 2]
+ra = c.loc[:, 'ra']
+dec = c.loc[:, 'dec']
 
 # generate theta/phi vectors
 theta = np.deg2rad(90.0 - dec)
