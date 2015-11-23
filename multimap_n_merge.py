@@ -21,6 +21,12 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
             except:
             	pass
             
+            # check columns
+            try:
+            	assert (ra_col in c.columns) and (dec_col in c.columns), ("ra_col & dec_col must match RA & Dec column headers")
+            except NameError:
+            	pass
+            
             # generate theta/phi vectors
             try:
             	theta = np.deg2rad(90.0 - c[dec_col])
@@ -52,11 +58,11 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir):
     # check catalog_dir is a string
     assert isinstance(catalog_dir, basestring) == True, ("catalog_dir must be input as a string")
     
-    cat_columns = Table.read(join(catalog_dir, random.choice(listdir(catalog_dir))), format='ascii', delimiter=',').columns
-    assert (ra_col in cat_columns) and (dec_col in cat_columns), ("ra_col & dec_col must match RA & Dec column headers")
+#    cat_columns = Table.read(join(catalog_dir, random.choice(listdir(catalog_dir))), format='ascii', delimiter=',').columns
+ #   assert (ra_col in cat_columns) and (dec_col in cat_columns), ("ra_col & dec_col must match RA & Dec column headers")
     
-    del cat_columns
-    gc.collect()
+ #   del cat_columns
+  #  gc.collect()
     
     # define map resolution, create map of zeros
     assert hp.isnsideok(nside), ("nside must be a power of 2")
