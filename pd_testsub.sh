@@ -1,6 +1,6 @@
 #!/bin/tcsh
 #PBS -q cores12
-#PBS -N photom.test
+#PBS -N pd_test
 #PBS -l nodes=1:ppn=1
 #PBS -l mem=48gb
 #PBS -l walltime=120:00:00
