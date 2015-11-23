@@ -13,7 +13,7 @@ hmap = np.zeros(hp.nside2npix(nside))
 npix = hp.nside2npix(nside)
 
 # read catalog
-c = pandas.read_csv(join("/share/data1/SDSS_DR12_Photometry", random.choice(listdir("/share/data1/SDSS_DR12_Photometry"))), sep=',', low_memory=False, skip_blank_lines=False, header=0, dtype={'ra' : np.float64, 'dec' : np.float64})
+c = pandas.read_csv(join("/share/data1/SDSS_DR12_Photometry", random.choice(listdir("/share/data1/SDSS_DR12_Photometry"))), sep=',', low_memory=False, header=0, dtype={'ra' : np.float64, 'dec' : np.float64})
 ra = c.iloc[:, 1]
 dec = c.iloc[:, 2]
 
