@@ -18,9 +18,9 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
             # read catalog
             try:
                 c = Table.read(join(catalog_dir, cat), format='ascii', delimiter=',')
-            except: Exception, e:
-            	print str(e)
-            
+            except:
+                raise
+    
             # check columns
             try:
                 assert (ra_col in c.columns) and (dec_col in c.columns), ("ra_col & dec_col must match RA & Dec column headers")
