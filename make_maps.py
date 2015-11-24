@@ -8,13 +8,13 @@ from os import listdir, mkdir
 from astropy.table import Table
 import gc
 
-def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
+def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None):
     # create empty map
     hmap = np.zeros(hp.nside2npix(nside))
     npix = hp.nside2npix(nside)
     
     for cat in listdir(catalog_dir):
-        if cat.endswith(".csv") and cat.startswith("with_header"):
+        if cat.endswith('.csv') and cat.startswith('with_header'):
             # read catalog
             try:
                 c = Table.read(join(catalog_dir, cat), format='ascii', delimiter=',')
@@ -24,8 +24,8 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
             # check columns
             try:
                 assert (ra_col in c.columns) and (dec_col in c.columns), ("ra_col & dec_col must match RA & Dec column headers")
-            except NameError:
-                pass
+            except:
+                raise
             
             # generate theta/phi vectors
             try:
@@ -44,16 +44,17 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
                 
                 # assign filenames & write to file
                 out_filename = "countmap_" + cat[:-4] + ".fits"
-                hp.write_map(join(out_dir, out_filename), hmap)
+                f = join(out_dir, out_filename)
+                hp.write_map(f, hmap)
                 
                 del c
                 gc.collect()
-            except NameError:
-                pass
+            except:
+                raise
 
-                    return None
+    return None
 
-def main(catalog_dir, nside, ra_col, dec_col, out_dir):
+def main(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None):
     
     # check catalog_dir is a string
     assert isinstance(catalog_dir, basestring) == True, ("catalog_dir must be input as a string")
@@ -70,15 +71,18 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir):
     hmap = np.zeros(hp.nside2npix(nside))
     
     # create destination directory
-    assert isinstance(out_dir, basestring) == True, ("out_dir must be input as a string")
+    assert isinstance(out_dir, basestring) == True, ("out_dir must be a string")
     if not isdir(out_dir):
         mkdir(out_dir)
     else:
         assert listdir(out_dir) == [], ("out_dir already exists/has content, choose a new destination directory")
+	
+    try:
+        # create count maps
+        mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None)
+    except:
+    	raise
 
-# create count maps
-mapper1(catalog_dir, nside, ra_col, dec_col, out_dir)
-    
     # merge count maps
     for cmap in listdir(out_dir):
         m = hp.read_map(join(out_dir, cmap))
@@ -86,7 +90,8 @@ mapper1(catalog_dir, nside, ra_col, dec_col, out_dir)
     
     # assign filename & write final map
     out_filename = basename(normpath(catalog_dir)) + "_" + str(nside) + "cmap.fits"
-    hp.write_map(join(out_dir, out_filename), hmap)
+    f = join(out_dir, out_filename)
+    hp.write_map(f, hmap)
     
     return None
 
@@ -96,4 +101,6 @@ if __name__ == "__main__":
     ra_col = "ra"
     dec_col = "dec"
     out_dir = "/share/splinter/ug_hj/128_SDSS"
-    main(catalog_dir, nside, ra_col, dec_col, out_dir)
+    ew = None
+    sw = None
+    main(catalog_dir, nside, ra_col, dec_col, out_dir, sw, ew)
