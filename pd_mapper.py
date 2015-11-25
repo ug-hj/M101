@@ -20,28 +20,28 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
             ra = c.loc["ra"]
             dec = c.loc["dec"]
         
-        # generate theta/phi vectors
-        theta = np.deg2rad(90.0 - dec)
-        phi = np.deg2rad(ra)
-    
-        # generate corresponding pixel_IDs
-        pix_IDs = hp.ang2pix(nside, theta, phi, nest=False)
-    
-        # distribute galaxies according to pixel_ID, weights deal with potential systematics
-        cmap = np.bincount(pix_IDs, weights=None, minlength=npix)
-        assert len(cmap) == npix, ("pixel numbers mismatched")
-    
-        # sum to hmap
-        hmap = cmap
-    
-        # assign filenames & write to file
-        out_filename = "countmap_" + cat[:-4] + ".fits"
-        hp.write_map(join(out_dir, out_filename), hmap)
+            # generate theta/phi vectors
+            theta = np.deg2rad(90.0 - dec)
+            phi = np.deg2rad(ra)
+        
+            # generate corresponding pixel_IDs
+            pix_IDs = hp.ang2pix(nside, theta, phi, nest=False)
+        
+            # distribute galaxies according to pixel_ID, weights deal with potential systematics
+            cmap = np.bincount(pix_IDs, weights=None, minlength=npix)
+            assert len(cmap) == npix, ("pixel numbers mismatched")
+        
+            # sum to hmap
+            hmap = cmap
+        
+            # assign filenames & write to file
+            out_filename = "countmap_" + cat[:-4] + ".fits"
+            hp.write_map(join(out_dir, out_filename), hmap)
 
-        del c
-        del ra
-        del dec
-        gc.collect()
+            del c
+            del ra
+            del dec
+            gc.collect()
 
     return None
 
