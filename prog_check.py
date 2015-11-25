@@ -10,15 +10,15 @@ import gc
 
 out_dir = "/share/splinter/ug_hj/128_SDSS"
 nside = 128
-out_dir = "/share/splinter/ug_hj/128_SDSS"
 
 assert hp.isnsideok(nside), ("nside must be a power of 2")
 npix = hp.nside2npix(nside)
 hmap = np.zeros(hp.nside2npix(nside))
 
 for cmap in listdir(out_dir):
-	m = hp.read_map(join(out_dir, cmap))
-	hmap += m
+	if cmap.endswith(".fits"):
+        m = hp.read_map(join(out_dir, cmap))
+        hmap += m
 
 out_filename = str(nside) + "PRELIMcmap.fits"
 f = join(out_dir, out_filename)
