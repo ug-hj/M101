@@ -5,7 +5,6 @@
 #PBS -l mem=50gb
 #PBS -l walltime=120:00:00
 #PBS -M zcaphjo@ucl.ac.uk
-#PBS -m bea
 
 module load dev_tools/nov2014/python-anaconda
 
