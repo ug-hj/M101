@@ -13,7 +13,7 @@ hmap = np.zeros(hp.nside2npix(nside))
 npix = hp.nside2npix(nside)
 
 # read catalog
-c = pandas.read_csv(join("/share/data1/SDSS_DR12_Photometry", random.choice(listdir("/share/data1/SDSS_DR12_Photometry"))), sep=',', low_memory=False, header=0, dtype={'ra' : np.float64, 'dec' : np.float64})
+c = pandas.read_csv(join("/Users/Harry/M101/catalogs_sdss", random.choice(listdir("/Users/Harry/M101/catalogs_sdss"))), sep=',', low_memory=False, header=0, dtype={'ra' : np.float64, 'dec' : np.float64})
 ra = c.loc[:, 'ra']
 dec = c.loc[:, 'dec']
 
@@ -34,4 +34,4 @@ hmap += cmap
 del c
 gc.collect()
 
-hp.write_map("/share/splinter/ug_hj/pd_testmap.fits", hmap)
+hp.write_map("/Users/Harry/M101/ipynb_test.fits", hmap)

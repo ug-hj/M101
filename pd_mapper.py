@@ -16,53 +16,39 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
     for cat in listdir(catalog_dir):
         if cat.endswith(".csv") and cat.startswith("with_header"):
             # read catalog
-            try:
-            	c = pandas.read_csv(join(catalog_dir, cat), sep=',', low_memory=False, header=0, dtype={ra_col : np.float64, dec_col : np.float64})
-                ra = c.loc[:, ra_col]
-                dec = c.loc[:, dec_col]
-            except InconsistentTableError:
-            	pass
-            except:
-            	raise
-            
-            # generate theta/phi vectors
-            try:
-            	theta = np.deg2rad(90.0 - dec)
-            	phi = np.deg2rad(ra)
-            
-            	# generate corresponding pixel_IDs
-            	pix_IDs = hp.ang2pix(nside, theta, phi, nest=False)
-            
-            	# distribute galaxies according to pixel_ID, weights deal with potential systematics
-            	cmap = np.bincount(pix_IDs, weights=None, minlength=npix)
-            	assert len(cmap) == npix, ("pixel numbers mismatched")
-            
-            	# sum to hmap
-            	hmap = cmap
-            
-            	# assign filenames & write to file
-            	out_filename = "countmap_" + cat[:-4] + ".fits"
-            	hp.write_map(join(out_dir, out_filename), hmap)
+            c = pandas.read_csv(join(catalog_dir, cat), sep=',', low_memory=False, header=0, dtype={ra_col : np.float64, dec_col : np.float64}, engine=None, usecols=[1,2])
+            ra = c.loc["ra"]
+            dec = c.loc["dec"]
+        
+        # generate theta/phi vectors
+        theta = np.deg2rad(90.0 - dec)
+        phi = np.deg2rad(ra)
+    
+        # generate corresponding pixel_IDs
+        pix_IDs = hp.ang2pix(nside, theta, phi, nest=False)
+    
+        # distribute galaxies according to pixel_ID, weights deal with potential systematics
+        cmap = np.bincount(pix_IDs, weights=None, minlength=npix)
+        assert len(cmap) == npix, ("pixel numbers mismatched")
+    
+        # sum to hmap
+        hmap = cmap
+    
+        # assign filenames & write to file
+        out_filename = "countmap_" + cat[:-4] + ".fits"
+        hp.write_map(join(out_dir, out_filename), hmap)
 
-            	del c
-                del ra
-                del dec
-            	gc.collect()
-            except NameError:
-            	pass
-                
+        del c
+        del ra
+        del dec
+        gc.collect()
+
     return None
 
 def main(catalog_dir, nside, ra_col, dec_col, out_dir):
     
     # check catalog_dir is a string
     assert isinstance(catalog_dir, basestring) == True, ("catalog_dir must be input as a string")
-    
-    cat_columns = Table.read(join(catalog_dir, random.choice(listdir(catalog_dir))), format='ascii', delimiter=',').columns
-    assert (ra_col in cat_columns) and (dec_col in cat_columns), ("ra_col & dec_col must match RA & Dec column headers")
-    
-    del cat_columns
-    gc.collect()
     
     # define map resolution, create map of zeros
     assert hp.isnsideok(nside), ("nside must be a power of 2")
