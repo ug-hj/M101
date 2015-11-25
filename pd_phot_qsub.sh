@@ -1,8 +1,8 @@
 #!/bin/tcsh
 #PBS -q smp
 #PBS -N pd.dr12.map
-#PBS -l nodes=1:ppn=20
-#PBS -l mem=500gb
+#PBS -l nodes=1:ppn=4
+#PBS -l mem=50gb
 #PBS -l walltime=120:00:00
 #PBS -M zcaphjo@ucl.ac.uk
 #PBS -m bea
