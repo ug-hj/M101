@@ -14,7 +14,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
     npix = hp.nside2npix(nside)
     
     for cat in listdir(catalog_dir):
-        if cat.endswith(".csv"): #and cat.startswith("with_header"):
+        if cat.endswith(".csv") and cat.startswith("with_header"):
             # read catalog
             c = pandas.read_csv(join(catalog_dir, cat), sep=',', low_memory=False, header=0, dtype={ra_col : np.float64, dec_col : np.float64}, engine=None, usecols=[1,2])
             ra = c["ra"]
