@@ -79,7 +79,7 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None):
 	
     try:
         # create count maps
-        mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None)
+        mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw, ew)
     except:
     	raise
 
