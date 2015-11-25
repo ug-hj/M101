@@ -19,7 +19,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
             c = pandas.read_csv(join(catalog_dir, cat), sep=',', low_memory=False, header=0, dtype={ra_col : np.float64, dec_col : np.float64}, engine=None, usecols=[1,2])
             ra = c.loc["ra"]
             dec = c.loc["dec"]
-        	print("got here")
+            print("got here")
             # generate theta/phi vectors
             theta = np.deg2rad(90.0 - dec)
             phi = np.deg2rad(ra)
