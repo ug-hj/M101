@@ -71,6 +71,7 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir):
         hmap += m
 
 	# assign filename & write final map
+    print("got here")
     out_filename = basename(normpath(catalog_dir)) + "_" + str(nside) + "cmap.fits"
     hp.write_map(join(out_dir, out_filename), hmap)
     
