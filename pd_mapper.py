@@ -78,9 +78,9 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir):
     return None
 
 if __name__ == "__main__":
-    catalog_dir = "/share/splinter/ug_hj/test_sdss"
+    catalog_dir = "/share/data1/SDSS_DR12_Photometry"
     nside = 128
     ra_col = "ra"
     dec_col = "dec"
-    out_dir = "/share/splinter/ug_hj/M101/test_128_SDSS"
+    out_dir = "/share/splinter/ug_hj/M101/128_SDSS"
     main(catalog_dir, nside, ra_col, dec_col, out_dir)
