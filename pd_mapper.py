@@ -14,7 +14,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
     npix = hp.nside2npix(nside)
     
     for cat in listdir(catalog_dir):
-        if cat.endswith(".csv") and cat.startswith("with_header"):
+        if cat.endswith(".csv"): #and cat.startswith("with_header"):
             # read catalog
             c = pandas.read_csv(join(catalog_dir, cat), sep=',', low_memory=False, header=0, dtype={ra_col : np.float64, dec_col : np.float64}, engine=None, usecols=[1,2])
             ra = c.loc["ra"]
@@ -71,7 +71,7 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir):
         hmap += m
 
 	# assign filename & write final map
-    print("got here")
+    print("got here1")
     out_filename = basename(normpath(catalog_dir)) + "_" + str(nside) + "cmap.fits"
     hp.write_map(join(out_dir, out_filename), hmap)
     
@@ -82,5 +82,5 @@ if __name__ == "__main__":
     nside = 128
     ra_col = "ra"
     dec_col = "dec"
-    out_dir = "/share/splinter/ug_hj/test_128_SDSS"
+    out_dir = "/share/splinter/ug_hj/M101/test_128_SDSS"
     main(catalog_dir, nside, ra_col, dec_col, out_dir)
