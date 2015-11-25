@@ -8,7 +8,7 @@ from os import listdir, mkdir
 import pandas
 import gc
 
-def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
+def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weights=None):
     # create empty map
     hmap = np.zeros(hp.nside2npix(nside))
     npix = hp.nside2npix(nside)
@@ -19,7 +19,8 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
             c = pandas.read_csv(join(catalog_dir, cat), sep=',', header=0, dtype={ra_col : np.float64, dec_col : np.float64}, engine=None, usecols=[1,2])
             ra = c["ra"]
             dec = c["dec"]
-            print("table columns read")
+            print(str(cat) + ": table columns read") #see where errors are thrown
+
             # generate theta/phi vectors
             theta = np.deg2rad(90.0 - dec)
             phi = np.deg2rad(ra)
@@ -28,7 +29,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
             pix_IDs = hp.ang2pix(nside, theta, phi, nest=False)
         
             # distribute galaxies according to pixel_ID, weights deal with potential systematics
-            cmap = np.bincount(pix_IDs, weights=None, minlength=npix)
+            cmap = np.bincount(pix_IDs, weights=weights, minlength=npix)
             assert len(cmap) == npix, ("pixel numbers mismatched")
         
             # sum to hmap
@@ -45,7 +46,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
 
     return None
 
-def main(catalog_dir, nside, ra_col, dec_col, out_dir):
+def main(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weights=None):
     
     # define map resolution, create map of zeros
     assert hp.isnsideok(nside), ("nside must be a power of 2")
@@ -59,7 +60,7 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir):
     	assert listdir(out_dir) == [], ("out_dir already exists/has content, choose a new destination directory")
     
     # create count maps
-    mapper1(catalog_dir, nside, ra_col, dec_col, out_dir)
+    mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw, ew, weights)
 
     # merge count maps
     for cmap in listdir(out_dir):
@@ -67,10 +68,11 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir):
         hmap += m
 
 	# assign filename & write final map
-    if hmap != np.zeros(npix):
+    if all(x == 0 for x in hmap):
         out_filename = basename(normpath(catalog_dir)) + "_" + str(nside) + "cmap.fits"
         hp.write_map(join(out_dir, out_filename), hmap)
-    else: print("empty map")
+    else:
+        print("empty map")
 
     return None
 
@@ -80,4 +82,7 @@ if __name__ == "__main__":
     ra_col = "ra"
     dec_col = "dec"
     out_dir = "/share/splinter/ug_hj/M101/128_SDSS"
-    main(catalog_dir, nside, ra_col, dec_col, out_dir)
+    sw = None
+    ew = None
+    weights = None
+    main(catalog_dir, nside, ra_col, dec_col, out_dir, sw, ew, weights)
