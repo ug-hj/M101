@@ -19,7 +19,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
             c = pandas.read_csv(join(catalog_dir, cat), sep=',', low_memory=False, header=0, dtype={ra_col : np.float64, dec_col : np.float64}, engine=None, usecols=[1,2])
             ra = c["ra"]
             dec = c["dec"]
-            print("got here")
+            print("table columns read")
             # generate theta/phi vectors
             theta = np.deg2rad(90.0 - dec)
             phi = np.deg2rad(ra)
@@ -47,16 +47,12 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir):
 
 def main(catalog_dir, nside, ra_col, dec_col, out_dir):
     
-    # check catalog_dir is a string
-    assert isinstance(catalog_dir, basestring) == True, ("catalog_dir must be input as a string")
-    
     # define map resolution, create map of zeros
     assert hp.isnsideok(nside), ("nside must be a power of 2")
     npix = hp.nside2npix(nside)
-    hmap = np.zeros(hp.nside2npix(nside))
+    hmap = np.zeros(npix)
     
     # create destination directory
-    assert isinstance(out_dir, basestring) == True, ("out_dir must be input as a string")
     if not isdir(out_dir):
         mkdir(out_dir)
     else:
@@ -71,10 +67,11 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir):
         hmap += m
 
 	# assign filename & write final map
-    print("got here1")
-    out_filename = basename(normpath(catalog_dir)) + "_" + str(nside) + "cmap.fits"
-    hp.write_map(join(out_dir, out_filename), hmap)
-    
+    if hmap != np.zeros(npix):
+        out_filename = basename(normpath(catalog_dir)) + "_" + str(nside) + "cmap.fits"
+        hp.write_map(join(out_dir, out_filename), hmap)
+    else: print("empty map")
+
     return None
 
 if __name__ == "__main__":
