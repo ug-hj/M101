@@ -30,6 +30,8 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
         
             # distribute galaxies according to pixel_ID, weights deal with potential systematics
             cmap = np.bincount(pix_IDs, weights=weights, minlength=npix)
+            if weights is not None:
+                assert len(weights) == len(pix_IDs), ("shape of weights must match shape of ra/dec data")
             assert len(cmap) == npix, ("pixel numbers mismatched")
         
             # sum to hmap
