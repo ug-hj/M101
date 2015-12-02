@@ -14,7 +14,7 @@ def exscissor(infile, ra_starts, dec_starts, ra_stops, dec_stops, nside):
 	# calculate length scale of 1 pixel in radians
 	radperpix = ((4*np.pi)/(12*(nside**2))/np.pi)**(0.5)
 
-	# define "galaxy" separation, such that all pixels in ra/dec range are populated
+	# define "galaxy" separation, such that all pixels in ra/dec range are populated, 1.1* for safety
 	ra_steps = np.around(1.1*(ra_stops - ra_starts)/radperpix)
 	dec_steps = np.around(1.1*(dec_stops - dec_starts)/radperpix)
 	steps = np.zeros(len(ra_steps))
