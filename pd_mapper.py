@@ -94,7 +94,7 @@ if __name__ == "__main__":
     nside = 128
     ra_col = "ra"
     dec_col = "dec"
-    out_dir = "/share/splinter/ug_hj/M101/128_SDSS"
+    out_dir = "/share/splinter/ug_hj/M101/128_SDSS_cuts"
     sw = None
     ew = None
     weights = None
