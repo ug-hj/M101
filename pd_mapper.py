@@ -20,14 +20,24 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
             ra = c["ra"]
             dec = c["dec"]
             stripecuts = c["stripe"]
-            cut61 = stripecuts != 61
-            cut62 = stripecuts != 62
-            cut76 = stripecuts != 76
-            cut82 = stripecuts != 82
-            cut86 = stripecuts != 86
+            cut1220 = stripecuts != 1220
+            cut1188 = stripecuts != 1188
+            cut1140 = stripecuts != 1140
+            cut1100 = stripecuts != 1100
+            cut1260 = stripecuts != 1260
+            cut1300 = stripecuts != 1300
+            cut1356 = stripecuts != 1356
+            cut1374 = stripecuts != 1374
+            cut1300 = stripecuts != 1406
+            cut1300 = stripecuts != 1458
+            cut1540 = stripecuts != 1540
+            cut1600 = stripecuts != 1600
+            cut1020 = stripecuts != 1020
+            cut1062 = stripecuts != 1062
+
             cleancut = c["clean"] == True
             typecut = c["type"] == 6
-            totalcut = cleancut & typecut & cut61 & cut62 & cut76 & cut82 & cut86
+            totalcut = cleancut & typecut & cut1220 & cut1188 & cut1140 & cut1100 & cut1260 & cut1300 & cut1356 & cut1374 & cut1300 & cut1300 & cut1540 & cut1600 & cut1020 & cut1062
 
             ra = ra[totalcut]
             dec = dec[totalcut]
