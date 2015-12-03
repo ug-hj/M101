@@ -64,7 +64,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
             out_filename = "countmap_" + cat[:-4] + ".fits"
             hp.write_map(join(out_dir, out_filename), hmap)
 
-            del c, ra, dec, cleancut, typecut, stripecuts, cut61, cut62, cut76, cut82, cut86
+            del c, ra, dec, cleancut, typecut, stripecuts, cut1220, cut1188, cut1140, cut1100, cut1260, cut1300, cut1356, cut1374, cut1300, cut1300, cut1540, cut1600, cut1020, cut1062
             gc.collect()
 
     return None
