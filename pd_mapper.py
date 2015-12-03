@@ -16,10 +16,23 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
     for cat in listdir(catalog_dir):
         if cat.endswith(".csv") and cat.startswith("with_header"):
             # read catalog
-            c = pandas.read_csv(join(catalog_dir, cat), sep=',', header=0, dtype={ra_col : np.float64, dec_col : np.float64}, engine=None, usecols=[1,2])
+            c = pandas.read_csv(join(catalog_dir, cat), sep=',', header=0, dtype={ra_col : np.float64, dec_col : np.float64}, engine=None, usecols=[1,2,9,10,311])
             ra = c["ra"]
             dec = c["dec"]
-            print(str(cat) + ": table columns read") #see where errors are thrown
+            stripecuts = c["stripe"]
+            cut61 = stripecuts != 61
+            cut62 = stripecuts != 62
+            cut76 = stripecuts != 76
+            cut82 = stripecuts != 82
+            cut86 = stripecuts != 86
+            cleancut = c["clean"] == True
+            typecut = c["type"] == 6
+            totalcut = cleancut & typecut & cut61 & cut62 & cut76 & cut82 & cut86
+
+            ra = ra[totalcut]
+            dec = dec[totalcut]
+
+            #print(str(cat) + ": table columns read") #see where errors are thrown
 
             # generate theta/phi vectors
             theta = np.deg2rad(90.0 - dec)
@@ -41,9 +54,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
             out_filename = "countmap_" + cat[:-4] + ".fits"
             hp.write_map(join(out_dir, out_filename), hmap)
 
-            del c
-            del ra
-            del dec
+            del c, ra, dec, cleancut, typecut, stripecuts, cut61, cut62, cut76, cut82, cut86
             gc.collect()
 
     return None
@@ -70,7 +81,7 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weights
         hmap += m
 
 	# assign filename & write final map
-    if all(x == 0 for x in hmap):
+    if not all(x == 0 for x in hmap):
         out_filename = basename(normpath(catalog_dir)) + "_" + str(nside) + "cmap.fits"
         hp.write_map(join(out_dir, out_filename), hmap)
     else:
