@@ -1,5 +1,5 @@
 #!/bin/tcsh
-#PBS -q compute
+#PBS -q cores12
 #PBS -N dr12.cutmap
 #PBS -l nodes=1:ppn=1
 #PBS -l mem=50gb
