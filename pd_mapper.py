@@ -28,8 +28,8 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
             cut1300 = stripecuts != 1300
             cut1356 = stripecuts != 1356
             cut1374 = stripecuts != 1374
-            cut1300 = stripecuts != 1406
-            cut1300 = stripecuts != 1458
+            cut1406 = stripecuts != 1406
+            cut1458 = stripecuts != 1458
             cut1540 = stripecuts != 1540
             cut1600 = stripecuts != 1600
             cut1020 = stripecuts != 1020
@@ -37,7 +37,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
 
             cleancut = c["clean"] == True
             typecut = c["type"] == 6
-            totalcut = cleancut & typecut & cut1220 & cut1188 & cut1140 & cut1100 & cut1260 & cut1300 & cut1356 & cut1374 & cut1300 & cut1300 & cut1540 & cut1600 & cut1020 & cut1062
+            totalcut = cleancut & typecut & cut1220 & cut1188 & cut1140 & cut1100 & cut1260 & cut1300 & cut1356 & cut1374 & cut1406 & cut1458 & cut1540 & cut1600 & cut1020 & cut1062
 
             ra = ra[totalcut]
             dec = dec[totalcut]
@@ -64,7 +64,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
             out_filename = "countmap_" + cat[:-4] + ".fits"
             hp.write_map(join(out_dir, out_filename), hmap)
 
-            del c, ra, dec, cleancut, typecut, stripecuts, cut1220, cut1188, cut1140, cut1100, cut1260, cut1300, cut1356, cut1374, cut1300, cut1300, cut1540, cut1600, cut1020, cut1062
+            del c, ra, dec, cleancut, typecut, stripecuts, cut1220, cut1188, cut1140, cut1100, cut1260, cut1300, cut1356, cut1374, cut1406, cut1458, cut1540, cut1600, cut1020, cut1062
             gc.collect()
 
     return None
