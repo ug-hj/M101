@@ -23,21 +23,21 @@ def striper(catalog_dir, ra_col, dec_col, outimg):
 			plt.scatter(ra, dec, c=stripe)
 
 			# define new stripe vector with no repeated values
-			stripe1 = np.zeros(len(stripe))
-			for x in np.arange(len(stripe)):
-				if not stripe[x] in stripe1:
-					stripe1[x] = stripe[x]
+			#stripe1 = np.zeros(len(stripe))
+			#for x in np.arange(len(stripe)):
+			#	if not stripe[x] in stripe1:
+			#		stripe1[x] = stripe[x]
 
 			# annotate points on scatter with stripe numbers
-			for l in np.arange(len(ra)):
-				if stripe1[l] != 0:
-					plt.annotate(s=str(int(stripe1[l])), xy=(str(ra[l]), str(dec[l])))
+			#for l in np.arange(len(ra)):
+			#	if stripe1[l] != 0:
+			#		plt.annotate(s=str(int(stripe1[l])), xy=(str(ra[l]), str(dec[l])))
 
 			del c
 			del ra
 			del dec
 			del stripe
-			del stripe1
+			#del stripe1
 			gc.collect()
 	plt.colorbar()
 	plt.savefig(outimg)
@@ -47,5 +47,5 @@ if __name__ == '__main__':
 	catalog_dir = '/share/data1/SDSS_DR12_Photometry'
 	ra_col = 'ra'
 	dec_col = 'dec'
-	outimg = '/share/splinter/ug_hj/SDSS_ra_vs_dec_wstripes.png'
+	outimg = '/share/splinter/ug_hj/M101/SDSS_ra_vs_dec_wstripes.png'
 	striper(catalog_dir, ra_col, dec_col, outimg)
