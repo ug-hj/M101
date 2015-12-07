@@ -19,30 +19,31 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
             c = pandas.read_csv(join(catalog_dir, cat), sep=',', header=0, dtype={ra_col : np.float64, dec_col : np.float64}, engine=None, usecols=[1,2,9,10,311])
             ra = c["ra"]
             dec = c["dec"]
-            stripecuts = c["stripe"]
-            cut1220 = stripecuts != 1220
-            cut1188 = stripecuts != 1188
-            cut1140 = stripecuts != 1140
-            cut1100 = stripecuts != 1100
-            cut1260 = stripecuts != 1260
-            cut1300 = stripecuts != 1300
-            cut1356 = stripecuts != 1356
-            cut1374 = stripecuts != 1374
-            cut1406 = stripecuts != 1406
-            cut1458 = stripecuts != 1458
-            cut1540 = stripecuts != 1540
-            cut1600 = stripecuts != 1600
-            cut1020 = stripecuts != 1020
-            cut1062 = stripecuts != 1062
+            #stripecuts = c["stripe"]
+            # cut1220 = stripecuts != 1220
+            # cut1188 = stripecuts != 1188
+            # cut1140 = stripecuts != 1140
+            # cut1100 = stripecuts != 1100
+            # cut1260 = stripecuts != 1260
+            # cut1300 = stripecuts != 1300
+            # cut1356 = stripecuts != 1356
+            # cut1374 = stripecuts != 1374
+            # cut1406 = stripecuts != 1406
+            # cut1458 = stripecuts != 1458
+            # cut1540 = stripecuts != 1540
+            # cut1600 = stripecuts != 1600
+            # cut1020 = stripecuts != 1020
+            # cut1062 = stripecuts != 1062
 
             cleancut = c["clean"] == True
             typecut = c["type"] == 3
-            totalcut = cleancut & typecut & cut1220 & cut1188 & cut1140 & cut1100 & cut1260 & cut1300 & cut1356 & cut1374 & cut1406 & cut1458 & cut1540 & cut1600 & cut1020 & cut1062
+            totalcut = cleancut & typecut# & cut1220 & cut1188 & cut1140 & cut1100 & cut1260 & cut1300 & cut1356 & cut1374 & cut1406 & cut1458 & cut1540 & cut1600 & cut1020 & cut1062
 
             ra = ra[totalcut]
             dec = dec[totalcut]
 
-            #print(str(cat) + ": table columns read") #see where errors are thrown
+            # galaxy count
+            num_gal += len(ra)
 
             # generate theta/phi vectors
             theta = np.deg2rad(90.0 - dec)
@@ -64,9 +65,9 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
             out_filename = "countmap_" + cat[:-4] + ".fits"
             hp.write_map(join(out_dir, out_filename), hmap)
 
-            del c, ra, dec, cleancut, typecut, stripecuts, cut1220, cut1188, cut1140, cut1100, cut1260, cut1300, cut1356, cut1374, cut1406, cut1458, cut1540, cut1600, cut1020, cut1062
+            del c, ra, dec, cleancut, typecut#, stripecuts, cut1220, cut1188, cut1140, cut1100, cut1260, cut1300, cut1356, cut1374, cut1406, cut1458, cut1540, cut1600, cut1020, cut1062
             gc.collect()
-
+    print("num_gal =", num_gal)
     return None
 
 def main(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weights=None):
@@ -104,7 +105,7 @@ if __name__ == "__main__":
     nside = 128
     ra_col = "ra"
     dec_col = "dec"
-    out_dir = "/share/splinter/ug_hj/M101/128_SDSS_cuts3"
+    out_dir = "/share/splinter/ug_hj/M101/128_SDSS_cuts4"
     sw = None
     ew = None
     weights = None
