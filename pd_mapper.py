@@ -12,6 +12,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
     # create empty map
     hmap = np.zeros(hp.nside2npix(nside))
     npix = hp.nside2npix(nside)
+    num_gal = 0
     
     for cat in listdir(catalog_dir):
         if cat.endswith(".csv") and cat.startswith("with_header"):
