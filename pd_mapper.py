@@ -69,6 +69,9 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
             del c, ra, dec, cleancut, typecut#, stripecuts, cut1220, cut1188, cut1140, cut1100, cut1260, cut1300, cut1356, cut1374, cut1406, cut1458, cut1540, cut1600, cut1020, cut1062
             gc.collect()
     print("num_gal =", num_gal)
+    count = open(join(out_dir, "count.txt"), "w")
+    count.write(str(num_gal))
+    count.close() 
     return None
 
 def main(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weights=None):
@@ -89,8 +92,9 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weights
 
     # merge count maps
     for cmap in listdir(out_dir):
-        m = hp.read_map(join(out_dir, cmap))
-        hmap += m
+        if cmap.endswith(".fits"):
+            m = hp.read_map(join(out_dir, cmap))
+            hmap += m
 
 	# assign filename & write final map
     if not all(x == 0 for x in hmap):
@@ -103,7 +107,7 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weights
 
 if __name__ == "__main__":
     catalog_dir = "/share/data1/SDSS_DR12_Photometry"
-    nside = 128
+    nside = 256
     ra_col = "ra"
     dec_col = "dec"
     out_dir = "/share/splinter/ug_hj/M101/128_SDSS_cuts4"
