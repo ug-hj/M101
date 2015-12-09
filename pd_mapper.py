@@ -110,7 +110,7 @@ if __name__ == "__main__":
     nside = 256
     ra_col = "ra"
     dec_col = "dec"
-    out_dir = "/share/splinter/ug_hj/M101/128_SDSS_cuts4"
+    out_dir = "/share/splinter/ug_hj/M101/256_cutmap"
     sw = None
     ew = None
     weights = None
