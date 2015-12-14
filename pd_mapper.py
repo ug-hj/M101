@@ -107,10 +107,10 @@ def main(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weights
 
 if __name__ == "__main__":
     catalog_dir = "/share/data1/SDSS_DR12_Photometry"
-    nside = 512
+    nside = 128
     ra_col = "ra"
     dec_col = "dec"
-    out_dir = "/share/splinter/ug_hj/M101/512_cutmap"
+    out_dir = "/share/splinter/ug_hj/M101/SDSS_cuts5"
     sw = None
     ew = None
     weights = None
