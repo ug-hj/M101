@@ -1,14 +1,20 @@
-#%matplotlib
-import os
-import os.path
-import healpy as hp
+from __future__ import print_function, division
 import numpy as np
+import healpy as hp
+import matplotlib
+import random
+from os.path import join, normpath, basename, isdir
+from os import listdir, mkdir
+import pandas
+import gc
+import math
 
-npix = hp.nside2npix(128)
-hmap = np.zeros(npix)
+def merger(infile_1, infile_2, out_filename):
+	A = hp.read_map(infile_1)
+	B = hp.read_map(infile_2)
 
-for cmap in os.listdir("/share/splinter/ug_hj/M101/128_SDSS"):
-    m = hp.read_map(os.path.join("/share/splinter/ug_hj/M101/128_SDSS", cmap))
-    hmap += m
-    
-hp.write_map("/share/splinter/ug_hj/M101/128_SDSS/SDSS_cmap_128.fits", hmap)
+	C = A*B
+
+	hp.write_map(out_filename, C)
+
+	return None
