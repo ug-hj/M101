@@ -11,4 +11,4 @@ source /share/splinter/sbalan/Projects/LauraPCL/envvars.csh
 
 cd $PBS_O_WORKDIR
 
-IlmJlm -m /share/splinter/ug_hj/M101/256cutmapValuemask.fits -O /share/splinter/ug_hj/M101/PCL/256cutmapValuemask_IlmJlm_0-85.dat -N 256 -l 0 -L 85
+IlmJlm -m /share/splinter/ug_hj/M101/256cutmapValuemask.fits -O /share/splinter/ug_hj/M101/PCL/256cutmapValuemask_IlmJlm_0-85.dat -N 256 -L 85
