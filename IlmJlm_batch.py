@@ -19,12 +19,17 @@ def main(jobname, queue, l_max, bin_size, out_filename):
 					"#PBS -l mem=50gb",
 					"#PBS -l walltime=120:00:00",
 					"#PBS -o /share/splinter/ug_hj/PCL/bin10/IJs/",
-					"source /share/splinter/sbalan/Projects/LauraPCL/envvars.csh", 
-					"cd $PBS_O_WORKDIR"]
+					"",
+					"source /share/splinter/sbalan/Projects/LauraPCL/envvars.csh",
+					"", 
+					"cd $PBS_O_WORKDIR",
+					""]
 		if l != 0:									
 			shell_script.append("IlmJlm -m /share/splinter/ug_hj/M101/256cutmapValueMaxmasks.fits -O /share/splinter/ug_hj/M101/PCL/256ValMaxmask_IlmJlm_" + str(i) + ".dat -N 256 -l " + str(l) + " -L " + str(multipole2[i]))
 		else:
 			shell_script.append("IlmJlm -m /share/splinter/ug_hj/M101/256cutmapValueMaxmasks.fits -O /share/splinter/ug_hj/M101/PCL/256ValMaxmask_IlmJlm_" + str(i) + ".dat -N 256" + " -L " + str(multipole2[i]))
+
+		shell_script.append("")
 
 		F = str(out_filename) + str(l) + "-" + str(multipole2[i]) + ".sh"
 		A = open(F, "w")
