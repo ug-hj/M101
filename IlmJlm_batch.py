@@ -18,23 +18,24 @@ def main(jobname, queue, l_max, bin_size, out_filename):
 					"#PBS -l nodes=1:ppn=1",
 					"#PBS -l mem=50gb",
 					"#PBS -l walltime=120:00:00",
+					"#PBS -o /share/splinter/ug_hj/PCL/bin10/IJs/"
 					"#PBS -M zcaphjo@ucl.ac.uk",
-					"#PBS -m bea",
+					"#PBS -m ea",
 					"source /share/splinter/sbalan/Projects/LauraPCL/envvars.csh", 
 					"cd $PBS_O_WORKDIR"]
 		if l != 0:									
-			shell_script.append("IlmJlm -m /share/splinter/ug_hj/M101/256cutmapValuemask.fits -O /share/splinter/ug_hj/M101/PCL/256cutmapValuemask_IlmJlm_" + str(i) + ".dat -N 256 -l " + str(l) + " -L " + str(multipole2[i]))
+			shell_script.append("IlmJlm -m /share/splinter/ug_hj/M101/256cutmapValue&Maxmasks.fits -O /share/splinter/ug_hj/M101/PCL/256cutmapValuemask_IlmJlm_" + str(i) + ".dat -N 256 -l " + str(l) + " -L " + str(multipole2[i]))
 		else:
-			shell_script.append("IlmJlm -m /share/splinter/ug_hj/M101/256cutmapValuemask.fits -O /share/splinter/ug_hj/M101/PCL/256cutmapValuemask_IlmJlm_" + str(i) + ".dat -N 256" + " -L " + str(multipole2[i]))
-			
+			shell_script.append("IlmJlm -m /share/splinter/ug_hj/M101/256cutmapValue&Maxmasks.fits -O /share/splinter/ug_hj/M101/PCL/256cutmapValuemask_IlmJlm_" + str(i) + ".dat -N 256" + " -L " + str(multipole2[i]))
+
 		F = str(out_filename) + str(l) + "-" + str(multipole2[i]) + ".sh"
 		A = open(F, "w")
 		T = "\n".join(shell_script)
 		A.write(str(T))
 		A.close()
 
-		os.system("qsub " + F)
-		os.system("sleep 1")
+		# os.system("qsub " + F)
+		# os.system("sleep 1")
 
 if __name__ == "__main__":
 	jobname = "PCL"
