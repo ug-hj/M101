@@ -37,5 +37,5 @@ if __name__ == "__main__":
 	queue = "compute"
 	l_max = 510
 	bin_size = 10
-	out_filename = "/share/splinter/ug_hj/M101/PCL/bin10"
+	out_filename = "/share/splinter/ug_hj/M101/PCL/bin10/"
 	main(jobname, queue, l_max, bin_size, out_filename)
