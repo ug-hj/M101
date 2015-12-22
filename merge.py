@@ -9,11 +9,14 @@ import pandas
 import gc
 import math
 
-def merger(infile_1, infile_2, out_filename):
-	A = hp.read_map(infile_1)
-	B = hp.read_map(infile_2)
-
-	C = A*B
+def merger(out_filename, *in_files):
+	mask1 = hp.read_map(in_files[0])
+	C = np.array([1]*len(mask1))
+	
+	for mask in in_files:
+		A = np.array(hp.read_map(mask))
+		assert len(A) == len(C), ("nsides mismatched")
+		C = C*A
 
 	hp.write_map(out_filename, C)
 
