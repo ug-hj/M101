@@ -8,7 +8,7 @@ import os
 import pandas
 import gc
 
-def main(jobname, queue, l_max, bin_size, outfile_dir):
+def main(jobname, queue, l_max, bin_size, mask_fits, outfile_dir):
 	multipole1 = np.arange(start=0, stop=l_max, step=bin_size)
 	multipole2 = np.arange(start=bin_size, stop=(l_max + bin_size), step=bin_size)
 	for (i, l) in  enumerate(multipole1):
@@ -24,9 +24,9 @@ def main(jobname, queue, l_max, bin_size, outfile_dir):
 					"cd $PBS_O_WORKDIR",
 					""]
 		if l != 0:									
-			shell_script.append("IlmJlm -m /share/splinter/ug_hj/M101/256cutmapValueMaxmasks.fits -O /share/splinter/ug_hj/M101/PCL/bin10/IJs/256ValMaxmask_IlmJlm_" + str(i).zfill(2) + ".dat -N 256 -l " + str(l) + " -L " + str(multipole2[i]))
+			shell_script.append("IlmJlm -m " + str(mask_fits) + " -O " + str(outfile_dir) + "IJs/IlmJlm_" + str(i).zfill(2) + ".dat -N 256 -l " + str(l) + " -L " + str(multipole2[i]))
 		else:
-			shell_script.append("IlmJlm -m /share/splinter/ug_hj/M101/256cutmapValueMaxmasks.fits -O /share/splinter/ug_hj/M101/PCL/bin10/IJs/256ValMaxmask_IlmJlm_" + str(i).zfill(2) + ".dat -N 256" + " -L " + str(multipole2[i]))
+			shell_script.append("IlmJlm -m " + str(mask_fits) + " -O " + str(outfile_dir) + "IJs/IlmJlm_" + str(i).zfill(2) + ".dat -N 256" + " -L " + str(multipole2[i]))
 
 		shell_script.append("")
 
@@ -44,5 +44,6 @@ if __name__ == "__main__":
 	queue = "compute"
 	l_max = 510
 	bin_size = 10
-	outfile_dir = "/share/splinter/ug_hj/M101/PCL/bin10/"
+	mask_fits = "/share/splinter/ug_hj/M101/256ValMaxBriBadx1_mask.fits"
+	outfile_dir = "/share/splinter/ug_hj/M101/PCL/ValMaxBriBadx1/" # check for ////
 	main(jobname, queue, l_max, bin_size, outfile_dir)
