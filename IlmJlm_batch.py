@@ -11,6 +11,8 @@ import gc
 def main(jobname, queue, l_max, bin_size, mask_fits, outfile_dir):
 	multipole1 = np.arange(start=0, stop=l_max, step=bin_size)
 	multipole2 = np.arange(start=bin_size, stop=(l_max + bin_size), step=bin_size)
+	if not isdir(join(outfile_dir, "IJs")):
+		os.mkdir(join(outfile_dir, "IJs"))
 	for (i, l) in  enumerate(multipole1):
 		shell_script = ["#!/bin/tcsh",
 					"#PBS -q " + str(queue),
