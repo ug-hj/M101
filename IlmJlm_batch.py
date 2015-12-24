@@ -46,4 +46,4 @@ if __name__ == "__main__":
 	bin_size = 10
 	mask_fits = "/share/splinter/ug_hj/M101/256ValMaxBriBadx1_mask.fits"
 	outfile_dir = "/share/splinter/ug_hj/M101/PCL/ValMaxBriBadx1/" # check for ////
-	main(jobname, queue, l_max, bin_size, outfile_dir)
+	main(jobname, queue, l_max, bin_size, mask_fits, outfile_dir)
