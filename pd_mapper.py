@@ -40,8 +40,8 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
             typecut = c["type"] == 6
             totalcut = cleancut & typecut# & cut1220 & cut1188 & cut1140 & cut1100 & cut1260 & cut1300 & cut1356 & cut1374 & cut1406 & cut1458 & cut1540 & cut1600 & cut1020 & cut1062
 
-            ra = ra[totalcut]
-            dec = dec[totalcut]
+            # ra = ra[totalcut]
+            # dec = dec[totalcut]
 
             # galaxy count
             num_gal += len(ra)
@@ -110,7 +110,7 @@ if __name__ == "__main__":
     nside = 256
     ra_col = "ra"
     dec_col = "dec"
-    out_dir = "/share/splinter/ug_hj/M101/SDSS_stellar_density"
+    out_dir = "/share/splinter/ug_hj/M101/SDSS_256_objcount"
     sw = None
     ew = None
     weights = None
