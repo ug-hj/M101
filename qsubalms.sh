@@ -1,6 +1,6 @@
 #!/bin/tcsh
 #PBS -q compute
-#PBS -N Cl.4mask
+#PBS -N Alms
 #PBS -l nodes=1:ppn=1
 #PBS -l mem=50gb
 #PBS -l walltime=120:00:00
