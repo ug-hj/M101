@@ -10,4 +10,4 @@ source /share/splinter/sbalan/Projects/LauraPCL/envvars.csh
 
 cd $PBS_O_WORKDIR
 
-Map2Alm -I /share/splinter/ug_hj/M101/256cutmap.fits -O /share/splinter/ug_hj/M101/PCL/ValMaxBriBadx1/256cutmap_alms.fits -L 513 -m /share/splinter/ug_hj/M101/256ValMaxBriBadx1_mask.fits
+Map2Alm -I /share/splinter/ug_hj/M101/256cutmap.fits -O /share/splinter/ug_hj/M101/PCL/ValMaxBriBadx2/256cutmap_alms.fits -L 513 -m /share/splinter/ug_hj/M101/256ValMaxBriBadx2_mask.fits
