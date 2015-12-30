@@ -15,33 +15,20 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
     num_gal = 0
     
     for cat in listdir(catalog_dir):
-        if cat.endswith(".csv") and cat.startswith("with_header"):
+        if cat.endswith(".csv") and cat.startswith("with"):
             # read catalog
-            c = pandas.read_csv(join(catalog_dir, cat), sep=',', header=0, dtype={ra_col : np.float64, dec_col : np.float64}, engine=None, usecols=[1,2,9,10,311])
+            c = pandas.read_csv(join(catalog_dir, cat), sep=',', header=0, dtype={'ra' : np.float64, 'dec' : np.float64, 'cModelMag_i' : np.float64}, engine=None, usecols=['ra', 'dec', 'clean', 'type', 'cModelMag_i'])
             ra = c["ra"]
             dec = c["dec"]
-            #stripecuts = c["stripe"]
-            # cut1220 = stripecuts != 1220
-            # cut1188 = stripecuts != 1188
-            # cut1140 = stripecuts != 1140
-            # cut1100 = stripecuts != 1100
-            # cut1260 = stripecuts != 1260
-            # cut1300 = stripecuts != 1300
-            # cut1356 = stripecuts != 1356
-            # cut1374 = stripecuts != 1374
-            # cut1406 = stripecuts != 1406
-            # cut1458 = stripecuts != 1458
-            # cut1540 = stripecuts != 1540
-            # cut1600 = stripecuts != 1600
-            # cut1020 = stripecuts != 1020
-            # cut1062 = stripecuts != 1062
 
             cleancut = c["clean"] == True
-            typecut = c["type"] == 6
-            totalcut = cleancut & typecut# & cut1220 & cut1188 & cut1140 & cut1100 & cut1260 & cut1300 & cut1356 & cut1374 & cut1406 & cut1458 & cut1540 & cut1600 & cut1020 & cut1062
+            typecut = c["type"] == 3
+            icmodcut1 = c["cModelMag_i"] <= 19.9
+            icmodcut2 = c["cModelMag_i"] >= 17.5
+            totalcut = cleancut & typecut & icmodcut1 & icmodcut2
 
-            # ra = ra[totalcut]
-            # dec = dec[totalcut]
+            ra = ra[totalcut]
+            dec = dec[totalcut]
 
             # galaxy count
             num_gal += len(ra)
@@ -66,7 +53,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
             out_filename = "countmap_" + cat[:-4] + ".fits"
             hp.write_map(join(out_dir, out_filename), hmap)
 
-            del c, ra, dec, cleancut, typecut#, stripecuts, cut1220, cut1188, cut1140, cut1100, cut1260, cut1300, cut1356, cut1374, cut1406, cut1458, cut1540, cut1600, cut1020, cut1062
+            del c, ra, dec, cleancut, typecut, icmodcut1, icmodcut2 #, stripecuts, cut1220, cut1188, cut1140, cut1100, cut1260, cut1300, cut1356, cut1374, cut1406, cut1458, cut1540, cut1600, cut1020, cut1062
             gc.collect()
     print("num_gal =", num_gal)
     count = open(join(out_dir, "count.txt"), "w")
@@ -110,7 +97,7 @@ if __name__ == "__main__":
     nside = 256
     ra_col = "ra"
     dec_col = "dec"
-    out_dir = "/share/splinter/ug_hj/M101/SDSS_256_objcount"
+    out_dir = "/share/splinter/ug_hj/M101/cmod_cut_256"
     sw = None
     ew = None
     weights = None
