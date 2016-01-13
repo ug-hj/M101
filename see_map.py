@@ -38,6 +38,7 @@ def see_mapper(catalog_dir, nside, out_map):
                 pix_seeing[pix] += seeing[i]
 
             del c, ra, dec, seeing, pix_counts
+            gc.collect()
 
     pix_avg_seeing = np.array(pix_seeing)/np.array(pix_totalcounts)
 
