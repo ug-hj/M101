@@ -49,3 +49,4 @@ if __name__ = "__main__":
     catalog_dir = "/share/data1/SDSS_DR12_Photometry"
     nside = 256
     out_map = "/share/splinter/ug_hj/M101/seeing_map1.fits"
+    see_mapper(catalog_dir, nside, out_map)
