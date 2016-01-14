@@ -1,6 +1,6 @@
 #!/bin/tcsh
 #PBS -q compute
-#PBS -N dr12.remap
+#PBS -N 512map
 #PBS -l nodes=1:ppn=1
 #PBS -l mem=50gb
 #PBS -l walltime=120:00:00
