@@ -44,7 +44,7 @@ def main(jobname, queue, l_max, bin_size, mask_fits, outfile_dir):
 if __name__ == "__main__":
 	jobname = "PCL"
 	queue = "compute"
-	l_max = 510
+	l_max = 1020
 	bin_size = 10
 	mask_fits = "/share/splinter/ug_hj/M101/cmod_V_M_Br_Ba_mask256.fits"
 	outfile_dir = "/share/splinter/ug_hj/M101/PCL/cmodVMBrBa/" # check for ////

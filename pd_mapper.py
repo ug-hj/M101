@@ -22,7 +22,7 @@ def mapper1(catalog_dir, nside, ra_col, dec_col, out_dir, sw=None, ew=None, weig
             dec = c["dec"]
 
             cleancut = c["clean"] == True
-            typecut = c["type"] == 6
+            typecut = c["type"] == 3
             icmodcut1 = c["cModelMag_i"] <= 19.9
             icmodcut2 = c["cModelMag_i"] >= 17.5
             totalcut = cleancut & typecut & icmodcut1 & icmodcut2
