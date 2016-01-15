@@ -10,4 +10,4 @@ source /share/splinter/sbalan/Projects/LauraPCL/envvars.csh
 
 cd $PBS_O_WORKDIR
 
-Map2Alm -I /share/splinter/ug_hj/M101/cmod_cutmap256.fits -O /share/splinter/ug_hj/M101/PCL/cmodVMBrBa/cmod256_map_alms.fits -L 513 -m /share/splinter/ug_hj/M101/cmod_V_M_Br_Ba_mask256.fits
+Map2Alm -I /share/splinter/ug_hj/M101/cmod512map.fits -O /share/splinter/ug_hj/M101/PCL/ebv_plus/cmod512map_alms.fits -L 513 -m /share/splinter/ug_hj/M101/Ebv0.4See1.55Air1.4VM200BrBa_512mask.fits

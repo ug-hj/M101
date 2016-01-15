@@ -8,7 +8,7 @@ import os
 import pandas
 import gc
 
-def main(jobname, queue, l_max, bin_size, mask_fits, outfile_dir):
+def main(nside, jobname, queue, l_max, bin_size, mask_fits, outfile_dir):
 	multipole1 = np.arange(start=0, stop=l_max, step=bin_size)
 	multipole2 = np.arange(start=bin_size, stop=(l_max + bin_size), step=bin_size)
 	if not isdir(join(outfile_dir, "IJs")):
@@ -26,9 +26,9 @@ def main(jobname, queue, l_max, bin_size, mask_fits, outfile_dir):
 					"cd $PBS_O_WORKDIR",
 					""]
 		if l != 0:									
-			shell_script.append("IlmJlm -m " + str(mask_fits) + " -O " + str(outfile_dir) + "IJs/IlmJlm_" + str(i).zfill(2) + ".dat -N 256 -l " + str(l) + " -L " + str(multipole2[i]))
+			shell_script.append("IlmJlm -m " + str(mask_fits) + " -O " + str(outfile_dir) + "IJs/IlmJlm_" + str(i).zfill(2) + ".dat -N " + str(nside) + " -l " + str(l) + " -L " + str(multipole2[i]))
 		else:
-			shell_script.append("IlmJlm -m " + str(mask_fits) + " -O " + str(outfile_dir) + "IJs/IlmJlm_" + str(i).zfill(2) + ".dat -N 256" + " -L " + str(multipole2[i]))
+			shell_script.append("IlmJlm -m " + str(mask_fits) + " -O " + str(outfile_dir) + "IJs/IlmJlm_" + str(i).zfill(2) + ".dat -N " + str(nside) + " -L " + str(multipole2[i]))
 
 		shell_script.append("")
 
@@ -42,10 +42,11 @@ def main(jobname, queue, l_max, bin_size, mask_fits, outfile_dir):
 		# os.system("sleep 1")
 
 if __name__ == "__main__":
+	nside = 512
 	jobname = "PCL"
 	queue = "compute"
 	l_max = 1020
 	bin_size = 10
-	mask_fits = "/share/splinter/ug_hj/M101/cmod_V_M_Br_Ba_mask256.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/PCL/cmodVMBrBa/" # check for ////
-	main(jobname, queue, l_max, bin_size, mask_fits, outfile_dir)
+	mask_fits = "/share/splinter/ug_hj/M101/Ebv0.4See1.55Air1.4VM200BrBa_512mask.fits"
+	outfile_dir = "/share/splinter/ug_hj/M101/PCL/ebv_plus/" # check for ////
+	main(nside, jobname, queue, l_max, bin_size, mask_fits, outfile_dir)
