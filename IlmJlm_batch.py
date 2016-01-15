@@ -26,13 +26,13 @@ def main(nside, jobname, queue, l_max, bin_size, mask_fits, outfile_dir):
 					"cd $PBS_O_WORKDIR",
 					""]
 		if l != 0:									
-			shell_script.append("IlmJlm -m " + str(mask_fits) + " -O " + str(outfile_dir) + "IJs/IlmJlm_" + str(i).zfill(2) + ".dat -N " + str(nside) + " -l " + str(l) + " -L " + str(multipole2[i]))
+			shell_script.append("IlmJlm -m " + str(mask_fits) + " -O " + str(outfile_dir) + "IJs/IlmJlm_" + str(i).zfill(4) + ".dat -N " + str(nside) + " -l " + str(l) + " -L " + str(multipole2[i]))
 		else:
-			shell_script.append("IlmJlm -m " + str(mask_fits) + " -O " + str(outfile_dir) + "IJs/IlmJlm_" + str(i).zfill(2) + ".dat -N " + str(nside) + " -L " + str(multipole2[i]))
+			shell_script.append("IlmJlm -m " + str(mask_fits) + " -O " + str(outfile_dir) + "IJs/IlmJlm_" + str(i).zfill(4) + ".dat -N " + str(nside) + " -L " + str(multipole2[i]))
 
 		shell_script.append("")
 
-		F = str(outfile_dir) + str(l).zfill(3) + "-" + str(multipole2[i]).zfill(3) + ".sh"
+		F = str(outfile_dir) + str(l).zfill(4) + "-" + str(multipole2[i]).zfill(4) + ".sh"
 		A = open(F, "w")
 		T = "\n".join(shell_script)
 		A.write(str(T))
