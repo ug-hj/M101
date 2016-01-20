@@ -42,10 +42,10 @@ def main(nside, jobname, queue, l_max, bin_size, mask_fits, outfile_dir):
 		# os.system("sleep 1")
 
 if __name__ == "__main__":
-	nside = 512
+	nside = 256
 	jobname = "PCL"
 	queue = "compute"
-	l_max = 1020
+	l_max = 510
 	bin_size = 10
 	mask_fits = "/share/splinter/ug_hj/M101/Ebv0.4See1.55Air1.4VM200BrBa_512mask.fits"
 	outfile_dir = "/share/splinter/ug_hj/M101/PCL/ebv_plus/" # check for ////
