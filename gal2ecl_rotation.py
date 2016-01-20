@@ -31,7 +31,7 @@ def gal2ecl(in_file, out_file, deg_angles):
     hp.write_map(out_file, rotated_alms)
 
 if __name__ == "__main__":
-    in_file = '/share/splinter/ug_hj/lambda256ebv_alms.fits'
-    out_file = '/share/splinter/ug_hj/lambda256ebv_almsRotated.fits'
+    in_file = '/share/splinter/ug_hj/M101/lambda256ebv_alms.fits'
+    out_file = '/share/splinter/ug_hj/M101/lambda256ebv_almsRotated.fits'
     deg_angles = [282.25, 62.6, 33]
-    gal2ecl(in_file, nside, out_file)
+    gal2ecl(in_file, out_file, deg_angles)
