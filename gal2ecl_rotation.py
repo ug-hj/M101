@@ -24,12 +24,13 @@ def gal2ecl(in_file, nside, out_file):
     #     ecliptic[pix] = galactic[i]
     
     [eulers = np.deg2rad(x) for x in deg_angles]
-    rotated_alms = hp.rotate_alm(in_file, eulers[0], eulers[1], eulers[2], lmax=513)
+
+    alms = hp.read_alm(in_file)
+    rotated_alms = hp.rotate_alm(alms, eulers[0], eulers[1], eulers[2], lmax=513)
 
     hp.write_map(out_file, rotated_alms)
 
 if __name__ == "__main__":
     in_file = '/share/splinter/ug_hj/lambda256ebv_alms.fits'
-    nside = 256
     out_file = '/share/splinter/ug_hj/lambda256ebv_almsRotated.fits'
     deg_angles = [282.25, 62.6, 33]
