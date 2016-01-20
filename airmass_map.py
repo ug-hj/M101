@@ -45,6 +45,8 @@ def airmass_mapper(catalog_dir, nside, out_map):
 
     # map airmass
     hp.write_map(out_map, pix_avg_airmass)
+    hp.write_map('/share/splinter/ug_hj/M101/airmass_totals.fits', pix_airmass)
+    hp.write_map('/share/splinter/ug_hj/M101/count_totals.fits', pix_totalcounts)
 
 if __name__ == "__main__":
     catalog_dir = "/share/data1/SDSS_DR12_Photometry"
