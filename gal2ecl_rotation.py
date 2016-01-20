@@ -9,7 +9,7 @@ import pandas
 import gc
 from astropy.coordinates import SkyCoord
 
-def gal2ecl(in_file, nside, out_file):
+def gal2ecl(in_file, out_file, deg_angles):
     # galactic = hp.read_map(in_file)
     # b = np.arange(len(galactic))
 
