@@ -52,4 +52,4 @@ if __name__ == "__main__":
     catalog_dir = "/share/data1/SDSS_DR12_Photometry"
     nside = 256
     out_map = "/share/splinter/ug_hj/M101/airmass_map256new.fits"
-    see_mapper(catalog_dir, nside, out_map)
+    airmass_mapper(catalog_dir, nside, out_map)
