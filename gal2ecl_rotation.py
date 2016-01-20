@@ -23,7 +23,7 @@ def gal2ecl(in_file, nside, out_file):
     # for (i, pix) in enumerate(pix_IDs):
     #     ecliptic[pix] = galactic[i]
     
-    [eulers = np.deg2rad(x) for x in deg_angles]
+    eulers = [np.deg2rad(x) for x in deg_angles]
 
     alms = hp.read_alm(in_file)
     rotated_alms = hp.rotate_alm(alms, eulers[0], eulers[1], eulers[2], lmax=513)
