@@ -26,34 +26,31 @@ def airmass_mapper(catalog_dir, nside, out_map):
             # generate object pixel_IDs & pixel_counts
             theta = np.deg2rad(90.0 - dec)
             phi = np.deg2rad(ra)
-            pix_IDs = hp.ang2pix(nside, theta, phi, nest=False)
+            pix_IDs = np.array(hp.ang2pix(nside, theta, phi, nest=False))
             pix_counts = np.bincount(pix_IDs, minlength=npix)
             assert len(pix_counts) == npix, ("pixel numbers mismatched")
 
-            # sum to total counts
-            # pix_totalcounts += pix_counts
-
             # calculate "total" airmass in each pixel
-            # for (i, pix) in enumerate(pix_IDs):
-            #     pix_airmass[pix] += airmass[i]
-            #     pix_totalcounts[pix] += 1
+            for (i, pix) in enumerate(pix_IDs):
+                pix_airmass[pix] += airmass[i]
+                pix_totalcounts[pix] += 1
 
             # TRYING ARRAY INDEXING - IS THE SAME???    
-            pix_airmass[pix_IDs] += airmass
-            pix_totalcounts += pix_counts
+            # pix_airmass[pix_IDs] += airmass
+            # pix_totalcounts += pix_counts
 
-            del c, ra, dec, airmass, pix_counts
+            del c, ra, dec, airmass, pix_counts, pix_IDs
             gc.collect()
 
     pix_avg_airmass = pix_airmass/pix_totalcounts
 
     # map airmass
-    hp.write_map(out_map, pix_avg_airmass)
-    hp.write_map('/share/splinter/ug_hj/M101/airmass_totals_ai.fits', pix_airmass)
-    hp.write_map('/share/splinter/ug_hj/M101/count_totals_ai.fits', pix_totalcounts)
+    hp.write_map(out_map, pix_avg_airmass) # CHANGE FILENAMES??
+    hp.write_map('/Users/Harry/M101/ai_airmass_totals.fits', pix_airmass)
+    hp.write_map('/Users/Harry/M101/ai_count_totals.fits', pix_totalcounts)
 
 if __name__ == "__main__":
     catalog_dir = "/share/data1/SDSS_DR12_Photometry"
     nside = 256
-    out_map = "/share/splinter/ug_hj/M101/airmass_ai.fits"
+    out_map = "/share/splinter/ug_hj/M101/ai_airmass.fits"
     airmass_mapper(catalog_dir, nside, out_map)

@@ -23,15 +23,16 @@ def gal2ecl(in_file, out_file, deg_angles):
     # for (i, pix) in enumerate(pix_IDs):
     #     ecliptic[pix] = galactic[i]
     
-    eulers = [np.deg2rad(x) for x in deg_angles]
+    eulers = (deg_angles*2*np.pi)/360
 
     alms = hp.read_alm(in_file)
-    rotated_alms = hp.rotate_alm(alms, eulers[0], eulers[1], eulers[2])
+    hp.smoothalm(alms, fwhm=0.018)
+    hp.rotate_alm(alms, eulers[0], eulers[1], eulers[2])
 
-    hp.write_alm(out_file, rotated_alms)
+    hp.write_alm(out_file, alms)
 
 if __name__ == "__main__":
     in_file = '/share/splinter/ug_hj/M101/lambda256ebv_alms.fits'
     out_file = '/share/splinter/ug_hj/M101/lambda256ebv_almsRotated.fits'
-    deg_angles = [282.25, 62.6, 33]
+    deg_angles = np.array([282.25, 62.6, 33])
     gal2ecl(in_file, out_file, deg_angles)
