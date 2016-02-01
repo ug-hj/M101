@@ -3,7 +3,7 @@ import numpy as np
 import healpy as hp
 import matplotlib
 
-def gal2ecl(in_file, out_file, smooth, eulers=None):
+def gal2equ(in_file, out_file, smooth, eulers=None):
     
     e2g = np.array([[-0.054882486, -0.993821033, -0.096476249],
                    [ 0.494116468, -0.110993846,  0.862281440],
@@ -18,7 +18,7 @@ def gal2ecl(in_file, out_file, smooth, eulers=None):
 
     psi = np.arctan2(g2q[1,2],g2q[0,2])
     theta = np.arccos(g2q[2,2])
-    phi = np.arctan2(g2q[2,1],-g2q[2,0])
+    phi = np.arctan2(g2q[2,1],-g2q[2,0]) # deduced from zyz rotation matrix
     
     fwhm = smooth*((2*np.pi)/360)
 
