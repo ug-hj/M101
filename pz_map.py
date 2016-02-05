@@ -21,7 +21,8 @@ def mapper(catalog_dir, photozcat_dir, nside, out_dir, start, end):
             # define cuts
             pzc_type = pzc['type'] == 3
             pzc_clean = pzc['clean'] == 1
-            pzc_cut = pzc_type & pzc_clean
+            pzc_bad_z = pzc['z'] > 0
+            pzc_cut = pzc_type & pzc_clean & pzc_bad_z
 
             photo_z_prematch = pzc["z"] # INCLUDE ERRORS WHERE?
             pzcID_prematch = pzc['objID']
@@ -110,6 +111,9 @@ def mapper(catalog_dir, photozcat_dir, nside, out_dir, start, end):
 
                     del c, ra, dec, objID, pzcID, cleancut, typecut, rPetro_cut, colour_cut1, colour_cut2, colour_cut3, colour_cut4, match1, match2, slice1, slice2, slice3, slice4
                     gc.collect()
+
+        del pzc_clean, pzc_type, pzc_bad_z, photo_z_prematch, pzcID_prematch
+        gc.collect()
 
     print("num_gal =", num_gal)
     count = open(join(out_dir, "count.txt"), "w")
