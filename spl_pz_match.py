@@ -8,7 +8,7 @@ from os import listdir, mkdir
 import pandas
 import gc
 
-def match(photozcat_dir):
+def match(photozcat_dir, out_matches, out_NOmatches):
     
     num_gal = 0
 
@@ -95,6 +95,9 @@ def match(photozcat_dir):
         del pzc, pzc_NOmatch, pzc_clean, pzc_type, pzc_bad_z, pzc_large_zErr, pzcID_prematch, snip, reverse
         gc.collect()
 
+    pandas.DataFrame.to_csv(master_pzc, str(out_matches))
+    pandas.DataFrame.to_csv(master_pzcNOmatch, str(out_NOmatches))
+
     print("num_gal =", num_gal)
     count = open("/share/splinter/ug_hj/M101/matched_pz_count.txt", "w")
     count.write(str(num_gal))
@@ -142,4 +145,6 @@ def match(photozcat_dir):
 
 if __name__ == "__main__":
     photozcat_dir = "/share/splinter/moraes/photoz_cats/"
-    match(photozcat_dir)
+    out_matches = "/share/splinter/ug_hj/M101/PZ_matches2GAMA.csv"
+    out_NOmatches = "/share/splinter/ug_hj/M101/PZ_NOmatches2GAMA.csv"
+    match(photozcat_dir, out_matches, out_NOmatches)
