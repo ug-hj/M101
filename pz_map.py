@@ -21,7 +21,7 @@ def mapper(catalog_dir, photozcat_dir, nside, out_dir, start, end):
             # define cuts
             pzc_type = pzc['type'] == 3
             pzc_clean = pzc['clean'] == 1
-            pzc_bad_z = pzc['z'] > 0
+            pzc_bad_z = np.where((pzc['z'] > 0) & (pzc['z'] < 0.8), True, False)
             pzc_cut = pzc_type & pzc_clean & pzc_bad_z
 
             photo_z_prematch = pzc["z"] # INCLUDE ERRORS WHERE?
@@ -35,7 +35,7 @@ def mapper(catalog_dir, photozcat_dir, nside, out_dir, start, end):
                 if cat.endswith(".csv") and cat.startswith('with'):
                 
                     # read catalog
-                    c = pandas.read_csv(join(catalog_dir, cat), sep=',', header=0, dtype={'ra' : np.float64, 'dec' : np.float64, 'modelMag_u' : np.float64, 'modelMag_g' : np.float64, 'modelMag_r' : np.float64, 'modelMag_i' : np.float64, 'modelMag_z' : np.float64, 'extinction_u' : np.float64, 'extinction_g' : np.float64, 'extinction_r' : np.float64, 'extinction_i' : np.float64, 'extinction_z' : np.float64, 'petroMag_r' : np.float64}, engine=None, usecols=['objID', 'ra', 'dec', 'clean', 'type', 'modelMag_u', 'modelMag_g', 'modelMag_r', 'modelMag_i', 'modelMag_z', 'extinction_u', 'extinction_g', 'extinction_r', 'extinction_i', 'extinction_z', 'petroMag_r'])
+                    c = pandas.read_csv(join(catalog_dir, cat), sep=',', header=0, dtype={'ra' : np.float64, 'dec' : np.float64, 'modelMag_u' : np.float64, 'modelMag_g' : np.float64, 'modelMag_r' : np.float64, 'modelMag_i' : np.float64, 'modelMag_z' : np.float64, 'extinction_u' : np.float64, 'extinction_g' : np.float64, 'extinction_r' : np.float64, 'extinction_i' : np.float64, 'extinction_z' : np.float64, 'petroMag_r' : np.float64}, engine=None, usecols=['objID', 'ra', 'dec', 'clean', 'type', 'modelMag_u', 'modelMag_g', 'modelMag_r', 'modelMag_i', 'modelMag_z', 'extinction_u', 'extinction_g', 'extinction_r', 'extinction_i', 'extinction_z', 'petroMag_r']) # ALL BECOMES IRRELEVANT WITH GAMA CUT CATALOG
 
                     objID = c['objID']
                     ra = c["ra"]
