@@ -32,7 +32,7 @@ def cut(catalog_dir, out_cat):
             # define colour & magnitude cuts
             colour_cut1 = np.where((u-g >= -2) & (u-g <= 7), True, False)
             colour_cut2 = np.where((g-r >= -2) & (g-r <= 7), True, False)
-            colour_cut3 = np.where((r-i >= -2) & (r-i <= 7), True, False)
+            colour_cut3 = np.where((r-i >= -2) & (r-i <= 7), True, False)# CRAZY REDHISFT CUT 0.2 < Z < 0.8 ?
             colour_cut4 = np.where((i-z >= -2) & (i-z <= 7), True, False)
             rPetro_cut = np.where((rPetro >= 12.0) & (rPetro <= 19.4), True, False)
             cleancut = c["clean"] == True
@@ -47,7 +47,7 @@ def cut(catalog_dir, out_cat):
             del c
             gc.collect()
 
-    pandas.DataFrame.to_csv(master_cat, str(out_cat), columns=['objID', 'ra', 'dec'])
+        pandas.DataFrame.to_csv(master_cat, str(out_cat), columns=['objID', 'ra', 'dec'])
 
 if __name__ == '__main__':
     out_cat = '/share/splinter/ug_hj/M101/GAMA_SDSScatalog.csv'
