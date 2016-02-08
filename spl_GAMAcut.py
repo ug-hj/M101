@@ -12,7 +12,7 @@ def cut(catalog_dir, out_cat):
     for x in np.arange(len(listdir(catalog_dir))):
         x_cat = listdir(catalog_dir)[x]
         if x_cat.endswith('.csv') and x_cat.startswith('with'):
-            master_cat = pandas.read_csv(join(catalog_dir, listdir(catalog_dir)[x]), sep=',', header=0, dtype={'objID' : np.int64, 'ra' : np.float64, 'dec' : np.float64, 'modelMag_u' : np.float64, 'modelMag_g' : np.float64, 'modelMag_r' : np.float64, 'modelMag_i' : np.float64, 'modelMag_z' : np.float64, 'extinction_u' : np.float64, 'extinction_g' : np.float64, 'extinction_r' : np.float64, 'extinction_i' : np.float64, 'extinction_z' : np.float64, 'petroMag_r' : np.float64}, engine=None, usecols=['objID', 'ra', 'dec', 'clean', 'type', 'modelMag_u', 'modelMag_g', 'modelMag_r', 'modelMag_i', 'modelMag_z', 'extinction_u', 'extinction_g', 'extinction_r', 'extinction_i', 'extinction_z', 'petroMag_r'], nrows=0)
+            master_cat = pandas.read_csv(join(catalog_dir, listdir(catalog_dir)[x]), sep=',', header=0, dtype={'objID' : np.int64, 'ra' : np.float64, 'dec' : np.float64, 'modelMag_u' : np.float64, 'modelMag_g' : np.float64, 'modelMag_r' : np.float64, 'modelMag_i' : np.float64, 'modelMag_z' : np.float64, 'extinction_u' : np.float64, 'extinction_g' : np.float64, 'extinction_r' : np.float64, 'extinction_i' : np.float64, 'extinction_z' : np.float64, 'petroMag_r' : np.float64}, engine=None, usecols=['objID', 'ra', 'dec', 'clean', 'type', 'modelMag_u', 'modelMag_g', 'modelMag_r', 'modelMag_i', 'modelMag_z', 'extinction_u', 'extinction_g', 'extinction_r', 'extinction_i', 'extinction_z', 'petroMag_r'], nrows=1)
         if 'master_cat' in globals():
             break
     

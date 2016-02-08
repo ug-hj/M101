@@ -10,4 +10,4 @@ source /share/splinter/sbalan/Projects/LauraPCL/envvars.csh
 
 cd $PBS_O_WORKDIR
 
-Map2Alm -I /share/splinter/ug_hj/M101/lambda256_ebv.fits -O /share/splinter/ug_hj/M101/lambda256ebv_alms.fits -L 513 -m /share/splinter/ug_hj/M101/lambda256_ebvValuemask.fits
+Map2Alm -I /share/splinter/ug_hj/M101/GAMAcutmap256.fits -O /share/splinter/ug_hj/M101/GAMAcutmap256_alms.fits -L 513 -m /share/splinter/ug_hj/M101/Mask1.fits
