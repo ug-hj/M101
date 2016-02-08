@@ -92,8 +92,8 @@ def match(photozcat_dir, out_matches, out_NOmatches):
             master_pzc = pandas.concat([master_pzc, pzc])
             master_pzcNOmatch = pandas.concat([master_pzcNOmatch, pzc_NOmatch])
 
-        del pzc, pzc_NOmatch, pzc_clean, pzc_type, pzc_bad_z, pzc_large_zErr, pzcID_prematch, snip, reverse
-        gc.collect()
+            del pzc, pzc_NOmatch, pzc_clean, pzc_type, pzc_bad_z, pzc_large_zErr, pzcID_prematch, snip, reverse
+            gc.collect()
 
     pandas.DataFrame.to_csv(master_pzc, str(out_matches))
     pandas.DataFrame.to_csv(master_pzcNOmatch, str(out_NOmatches))
