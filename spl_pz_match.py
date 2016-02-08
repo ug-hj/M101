@@ -8,7 +8,7 @@ from os import listdir, mkdir
 import pandas
 import gc
 
-def match(photozcat_dir, out_matches, out_NOmatches):
+def match(out_matches, out_NOmatches):
     
     num_gal = 0
 
@@ -42,7 +42,6 @@ def match(photozcat_dir, out_matches, out_NOmatches):
     return None
 
 if __name__ == "__main__":
-    photozcat_dir = "/share/splinter/moraes/photoz_cats/"
     out_matches = "/share/splinter/ug_hj/M101/PZ_matches2GAMA_2.csv"
     out_NOmatches = "/share/splinter/ug_hj/M101/PZ_NOmatches2GAMA_2.csv"
-    match(photozcat_dir, out_matches, out_NOmatches)
+    match(out_matches, out_NOmatches)
