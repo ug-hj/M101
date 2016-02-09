@@ -19,17 +19,14 @@ def match(out_matches, out_NOmatches, low, upp):
 
     c = pandas.read_csv(root_GAMAcut_cat, sep=',', header=0, dtype={'ra' : np.float64, 'dec' : np.float64}, engine=None, usecols=['objID', 'ra', 'dec'])
 
-    len_pzc = len(pzc)
-
+    len_pzc = len(pzc) + 1 # for indexing
     c_objID = c['objID']
     pzc_objID = pzc['objID']
 
-    objID = [int(oID) for oID in c_objID]
+    intervals = np.arange(start=0, stop=len_pzc, step=len_pzc/6, dtype=np.int64)
 
-    if low is not None:
-        pzcID_prematch = [int(pzID) for pzID in pzc_objID[(len_pzc/low):(len_pzc/upp)]]
-    else:
-        pzcID_prematch = [int(pzID) for pzID in pzc_objID[:(len_pzc/upp)]]
+    objID = [int(oID) for oID in c_objID]
+    pzcID_prematch = [int(pzID) for pzID in pzc_objID[intervals[low]:intervals[upp]]]
 
     # match objIDs and photozcatIDs
     snip = np.array([np.where(pzcID_prematch_i in objID, True, False) for pzcID_prematch_i in pzcID_prematch])
@@ -53,6 +50,6 @@ def match(out_matches, out_NOmatches, low, upp):
 if __name__ == "__main__":
     out_matches = "/share/splinter/ug_hj/M101/SplitMatchRun/PZvGAMA_match1.csv"
     out_NOmatches = "/share/splinter/ug_hj/M101/SplitMatchRun/PZvGAMA_NOmatch1.csv"
-    low = None
-    upp = 6
+    low = 0
+    upp = 1
     match(out_matches, out_NOmatches, low, upp)
