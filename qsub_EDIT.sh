@@ -1,6 +1,6 @@
 #!/bin/tcsh
 #PBS -q compute
-#PBS -N match
+#PBS -N match9
 #PBS -l nodes=1:ppn=1
 #PBS -l mem=15gb
 #PBS -l walltime=120:00:00
