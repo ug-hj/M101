@@ -1,5 +1,5 @@
 #!/bin/tcsh
-#PBS -q smp
+#PBS -q compute
 #PBS -N match
 #PBS -l nodes=1:ppn=1
 #PBS -l mem=15gb
