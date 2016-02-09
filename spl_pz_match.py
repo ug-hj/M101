@@ -8,7 +8,7 @@ from os import listdir, mkdir
 import pandas
 import gc
 
-def match(out_matches, out_NOmatches):
+def match(out_matches, out_NOmatches, low, upp):
     
     num_gal = 0
 
@@ -19,8 +19,17 @@ def match(out_matches, out_NOmatches):
 
     c = pandas.read_csv(root_GAMAcut_cat, sep=',', header=0, dtype={'objID' : np.int32, 'ra' : np.float64, 'dec' : np.float64}, engine=None, usecols=['objID', 'ra', 'dec'])
 
-    objID = [int(oID) for oID in c['objID']]
-    pzcID_prematch = [int(pzID) for pzID in pzc['objID']]
+    len_pzc = len(pzc)
+
+    c_objID = c['objID']
+    pzc_objID = pzc['objID']
+
+    objID = [int(oID) for oID in c_objID]
+
+    if low is not None:
+        pzcID_prematch = [int(pzID) for pzID in pzc_objID[(len_pzc/low):(len_pzc/upp)]]
+    else:
+        pzcID_prematch = [int(pzID) for pzID in pzc_objID[:(len_pzc/upp)]]
 
     # match objIDs and photozcatIDs
     snip = np.array([np.where(pzcID_prematch_i in objID, True, False) for pzcID_prematch_i in pzcID_prematch])
@@ -44,4 +53,6 @@ def match(out_matches, out_NOmatches):
 if __name__ == "__main__":
     out_matches = "/share/splinter/ug_hj/M101/PZ_matches2GAMA_2.csv"
     out_NOmatches = "/share/splinter/ug_hj/M101/PZ_NOmatches2GAMA_2.csv"
-    match(out_matches, out_NOmatches)
+    low = None
+    upp = 6
+    match(out_matches, out_NOmatches, low, upp)
