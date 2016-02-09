@@ -83,7 +83,7 @@ def main(steps, jobname, queue, outfile_dir):
 
 		shell_script = ["#!/bin/tcsh",
 					"#PBS -q " + str(queue),
-					"#PBS -N " + str(jobname),
+					"#PBS -N " + str(jobname) + str(i),
 					"#PBS -l nodes=1:ppn=1",
 					"#PBS -l mem=15gb",
 					"#PBS -l walltime=120:00:00",
