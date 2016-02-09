@@ -15,9 +15,9 @@ def match(out_matches, out_NOmatches, low, upp):
     root_masterpzc = '/share/splinter/ug_hj/M101/PZ_NOmatches2GAMA.csv'
     root_GAMAcut_cat = '/share/splinter/ug_hj/M101/GAMA_SDSScatalog.csv'
     
-    pzc = pandas.read_csv(root_masterpzc, sep=',', header=0, dtype={'objID' : np.int32, 'z' : np.float64, 'zErr' : np.float64}, engine=None, usecols=['objID', 'z', 'zErr'])
+    pzc = pandas.read_csv(root_masterpzc, sep=',', header=0, dtype={'z' : np.float64, 'zErr' : np.float64}, engine=None, usecols=['objID', 'z', 'zErr'])
 
-    c = pandas.read_csv(root_GAMAcut_cat, sep=',', header=0, dtype={'objID' : np.int32, 'ra' : np.float64, 'dec' : np.float64}, engine=None, usecols=['objID', 'ra', 'dec'])
+    c = pandas.read_csv(root_GAMAcut_cat, sep=',', header=0, dtype={'ra' : np.float64, 'dec' : np.float64}, engine=None, usecols=['objID', 'ra', 'dec'])
 
     len_pzc = len(pzc)
 
@@ -45,14 +45,14 @@ def match(out_matches, out_NOmatches, low, upp):
     pandas.DataFrame.to_csv(master_pzcNOmatch, str(out_NOmatches))
 
     print("num_gal =", num_gal)
-    count = open("/share/splinter/ug_hj/M101/matched_pz_count.txt", "w")
+    count = open("/share/splinter/ug_hj/M101/SplitMatchRun/count1.txt", "w")
     count.write(str(num_gal))
     count.close() 
     return None
 
 if __name__ == "__main__":
-    out_matches = "/share/splinter/ug_hj/M101/PZ_matches2GAMA_2.csv"
-    out_NOmatches = "/share/splinter/ug_hj/M101/PZ_NOmatches2GAMA_2.csv"
+    out_matches = "/share/splinter/ug_hj/M101/SplitMatchRun/PZvGAMA_match1.csv"
+    out_NOmatches = "/share/splinter/ug_hj/M101/SplitMatchRun/PZvGAMA_NOmatch1.csv"
     low = None
     upp = 6
     match(out_matches, out_NOmatches, low, upp)
