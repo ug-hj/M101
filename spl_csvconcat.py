@@ -19,13 +19,13 @@ def concatenate(catalog_dir, out_csv):
 	c_cut = np.array(pzc1['clean'] == 1)
 	t_cut = np.array(pzc1['type'] == 3)
 	z = np.array(pzc1['z'])
-    z_cut = np.where((0 < z) & (z < 0.8), True, False)
-    cuts = c_cut & t_cut & z_cut
+	z_cut = np.where((0 < z) & (z < 0.8), True, False)
+	cuts = c_cut & t_cut & z_cut
 
-    pzc1 = pzc1[cuts]
+	pzc1 = pzc1[cuts]
 
-    del cuts, c_cut, t_cut, z_cut
-    gc.collect()
+	del cuts, c_cut, t_cut, z_cut
+	gc.collect()
 
 	for cat in cat_list[1:]:
 
