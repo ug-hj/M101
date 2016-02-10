@@ -23,12 +23,12 @@ def mapper1(catalog_dir, nside, out_dir):
             dec = c["dec"]
 
             # correct model/petrosian magnitudes
-            u = c['modelMag_u'] - c['extinction_u']
-            g = c['modelMag_g'] - c['extinction_g']
-            r = c['modelMag_r'] - c['extinction_r']
-            i = c['modelMag_i'] - c['extinction_i']
-            z = c['modelMag_z'] - c['extinction_z']
-            rPetro = c["petroMag_r"] - c['extinction_r']
+            u = np.array(c['modelMag_u'] - c['extinction_u'])
+            g = np.array(c['modelMag_g'] - c['extinction_g'])
+            r = np.array(c['modelMag_r'] - c['extinction_r'])
+            i = np.array(c['modelMag_i'] - c['extinction_i'])
+            z = np.array(c['modelMag_z'] - c['extinction_z'])
+            rPetro = np.array(c["petroMag_r"] - c['extinction_r'])
 
             # define colour & magnitude cuts
             colour_cut1 = np.where((u-g >= -2) & (u-g <= 7), True, False)
