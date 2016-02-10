@@ -16,10 +16,6 @@ def match(out_matches, out_NOmatches, count_file):
     root_GAMAcut_cat = '/share/splinter/ug_hj/M101/GAMA_SDSScatalog.csv'	
 	
     pzc = pandas.read_csv(root_masterpzc, sep=',', header=0, dtype={'z' : np.float64, 'zErr' : np.float64}, engine=None, usecols=['objID', 'z', 'zErr'])
-
-    z = np.array(pzc['z'])
-    z_cut = np.where((0 < z) & (z < 0.8), True, False)
-    pzc = pzc[z_cut]
 	
     c = pandas.read_csv(root_GAMAcut_cat, sep=',', header=0, dtype={'ra' : np.float64, 'dec' : np.float64}, engine=None, usecols=['objID', 'ra', 'dec'])
 	
