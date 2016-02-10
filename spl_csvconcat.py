@@ -34,10 +34,10 @@ def concatenate(catalog_dir, out_csv):
 		c_cut = np.array(pzc['clean'] == 1)
 		t_cut = np.array(pzc['type'] == 3)
 		z = np.array(pzc['z'])
-	    z_cut = np.where((0 < z) & (z < 0.8), True, False)
-	    cuts = c_cut & t_cut & z_cut
+		z_cut = np.where((0 < z) & (z < 0.8), True, False)
+		cuts = c_cut & t_cut & z_cut
 
-	    pzc = pzc[cuts]
+		pzc = pzc[cuts]
 
 		pzc1 =  pzc1.append(pzc) #pandas.concat([pzc1, pzc])
 
