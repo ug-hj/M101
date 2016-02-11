@@ -39,7 +39,7 @@ def concatenate(catalog_dir, out_csv):
 
 		pzc = pzc[cuts]
 
-		pzc1 =  pandas.concat([pzc1, pzc]) #pzc1.append(pzc) #pandas.concat([pzc1, pzc])
+		pzc1.append(pzc) #pandas.concat([pzc1, pzc])
 
 		del pzc, cuts, c_cut, t_cut, z_cut
 		gc.collect()
