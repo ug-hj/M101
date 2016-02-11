@@ -16,9 +16,9 @@ def ratios(catalog_dir):
 
 	ratios = []
 
-	for cat in cat_list[1:]:
+	for cat in cat_list:
 
-		pzc = pandas.read_csv(join(catalog_dir, cat), sep=',', header=1, dtype={'objID' : np.int64, 'z' : np.float64, 'zErr' : np.float64}, engine=None, usecols=['objID', 'type', 'clean', 'z', 'zErr'])
+		pzc = pandas.read_csv(join(catalog_dir, cat), sep=',', header=1, dtype={'objID' : np.int64}, engine=None, usecols=['objID'])
 
 		ID = pzc['objID']
 		unique = np.unique(ID)
