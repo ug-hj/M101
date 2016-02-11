@@ -23,11 +23,13 @@ def ratios(catalog_dir):
 		ID = pzc['objID']
 		unique = np.unique(ID)
 
-		ratio = len(unique)/len(ID)
+		if len(ID) != 0:
+			ratio = len(unique)/len(ID)
 
-		ratios.append(ratio)
+			ratios.append(ratio)
+			del ratio
 
-		del pzc, ratio
+		del pzc
 		gc.collect()
 
 	print('ratio spread =', np.unique(ratios))
