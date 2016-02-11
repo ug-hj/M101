@@ -12,8 +12,8 @@ def match(out_matches, out_NOmatches, upp, count_file):
     
     num_gal = 0
 
-    root_masterpzc = '/share/splinter/ug_hj/M101/PZ_NOmatches2GAMA_sample.csv'
-    root_GAMAcut_cat = '/share/splinter/ug_hj/M101/GAMA_SDSScatalog_sample.csv'
+    root_masterpzc = '/share/splinter/ug_hj/M101/PZ_NOmatches2GAMA.csv'
+    root_GAMAcut_cat = '/share/splinter/ug_hj/M101/GAMA_SDSScatalog.csv'
     
     pzc = pandas.read_csv(root_masterpzc, sep=',', header=0, dtype={'z' : np.float64, 'zErr' : np.float64}, engine=None, usecols=['objID', 'z', 'zErr'])
 
