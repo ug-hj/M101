@@ -24,7 +24,7 @@ def match(in_IDs, in_PZs, out_matches):
     match_cat['ra'] = match_cat['ra'].map(lambda x: '%2.13f' % x)
     match_cat['dec'] = match_cat['dec'].map(lambda x: '%2.13f' % x)
 	
-    match_cat.to_csv(str(out_matches), float_format='%d')
+    match_cat.to_csv(str(out_matches), float_format='%22d')
 	
     print('num_gal =', num_gal, '  SAVE OUTPUT')
     return None	

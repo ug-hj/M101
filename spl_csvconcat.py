@@ -47,7 +47,7 @@ def concatenate(catalog_dir, out_csv):
 	pzc1['z'] = pzc1['z'].map(lambda x: '%2.6f' % x)
 	pzc1['zErr'] = pzc1['zErr'].map(lambda x: '%2.6f' % x)
 
-	pzc1.to_csv(str(out_csv), float_format='%d')
+	pzc1.to_csv(str(out_csv), float_format='%22d')
 
 	print('num_gal =', len(pzc1))
 
@@ -55,5 +55,5 @@ def concatenate(catalog_dir, out_csv):
 
 if __name__ == '__main__':
 	catalog_dir = '/share/splinter/moraes/photoz_cats/'
-	out_csv = '/share/splinter/ug_hj/M101/PZs_sdss_totcat.csv'
+	out_csv = '/share/splinter/ug_hj/M101/PZs_sdss_totcat1.csv'
 	concatenate(catalog_dir, out_csv)
