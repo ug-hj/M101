@@ -19,13 +19,13 @@ def match(in_IDs, in_PZs, out_matches):
     # galaxy count	
     num_gal = len(match_cat)	
 	
-    match_cat.to_csv(str(out_matches))
+    match_cat.to_csv(str(out_matches), float_format='%d')
 	
     print('num_gal =', num_gal, '  SAVE OUTPUT')
     return None	
 	
 if __name__ == '__main__':
-    in_PZs = '/share/splinter/ug_hj/M101/  <---------  '  
+    in_PZs = '/share/splinter/ug_hj/M101/  <---------  '
     in_IDs = '/share/splinter/ug_hj/M101/GAMA_SDSScatalog.csv'
     out_matches = '/share/splinter/ug_hj/M101/SplitMatchRun/ANNz2vGAMA_matches.csv'
     match(in_IDs, in_PZs, out_matches)
