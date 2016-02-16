@@ -44,7 +44,10 @@ def concatenate(catalog_dir, out_csv):
 		del pzc, cuts, c_cut, t_cut, z_cut
 		gc.collect()
 
-	pzc1.to_csv(str(out_csv))
+	pzc1['z'] = pzc1['z'].map(lambda x: '%2.6f' % x)
+	pzc1['zErr'] = pzc1['zErr'].map(lambda x: '%2.6f' % x)
+
+	pzc1.to_csv(str(out_csv), float_format='%d')
 
 	print('num_gal =', len(pzc1))
 
