@@ -21,6 +21,8 @@ def match(in_IDs, in_PZs, out_matches):
 
     match_cat['z'] = match_cat['z'].map(lambda x: '%2.6f' % x)
     match_cat['zErr'] = match_cat['zErr'].map(lambda x: '%2.6f' % x)
+    match_cat['ra'] = match_cat['ra'].map(lambda x: '%2.13f' % x)
+    match_cat['dec'] = match_cat['dec'].map(lambda x: '%2.13f' % x)
 	
     match_cat.to_csv(str(out_matches), float_format='%d')
 	
