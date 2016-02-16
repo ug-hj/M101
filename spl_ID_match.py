@@ -17,7 +17,10 @@ def match(in_IDs, in_PZs, out_matches):
     match_cat = pandas.merge(c, pzc, on="objID")
 
     # galaxy count	
-    num_gal = len(match_cat)	
+    num_gal = len(match_cat)
+
+    match_cat['z'] = match_cat['z'].map(lambda x: '%2.6f' % x)
+    match_cat['zErr'] = match_cat['zErr'].map(lambda x: '%2.6f' % x)
 	
     match_cat.to_csv(str(out_matches), float_format='%d')
 	
