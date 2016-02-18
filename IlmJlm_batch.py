@@ -18,7 +18,7 @@ def main(nside, jobname, queue, l_max, bin_size, mask_fits, outfile_dir):
 					"#PBS -q " + str(queue),
 					"#PBS -N " + str(jobname),
 					"#PBS -l nodes=1:ppn=1",
-					"#PBS -l mem=50gb",
+					"#PBS -l mem=10gb",
 					"#PBS -l walltime=120:00:00",
 					"",
 					"source /share/splinter/sbalan/Projects/LauraPCL/envvars.csh",
@@ -44,9 +44,9 @@ def main(nside, jobname, queue, l_max, bin_size, mask_fits, outfile_dir):
 if __name__ == "__main__":
 	nside = 256
 	jobname = "l-bins"
-	queue = "smp"
+	queue = "compute"
 	l_max = 510
 	bin_size = 10
-	mask_fits = "/share/splinter/ug_hj/M101/Mask1.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/PCL/Mask1/" # check for ////
+	mask_fits = "/share/splinter/ug_hj/M101/Mask3.fits"
+	outfile_dir = "/share/splinter/ug_hj/M101/PCL/Mask3/" # check for ////
 	main(nside, jobname, queue, l_max, bin_size, mask_fits, outfile_dir)

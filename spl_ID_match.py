@@ -30,7 +30,7 @@ def match(in_IDs, in_PZs, out_matches):
     return None	
 	
 if __name__ == '__main__':
-    in_PZs = '/share/splinter/ug_hj/M101/PZs_sdss_totcat.csv'
+    in_PZs = '/share/splinter/ug_hj/M101/sdssPZs.csv'
     in_IDs = '/share/splinter/ug_hj/M101/GAMA_SDSScatalog.csv'
-    out_matches = '/share/splinter/ug_hj/M101/sdssPZvGAMA_matches.csv'
+    out_matches = '/share/splinter/ug_hj/M101/sdssPZvGAMA_matches_1.csv'
     match(in_IDs, in_PZs, out_matches)
