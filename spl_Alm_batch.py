@@ -40,7 +40,7 @@ def main(nside, jobname, queue, map_dir, mask_fits, outfile_dir):
 						"cd $PBS_O_WORKDIR",
 						""]									
 
-			shell_script.append("Map2Alm -I " + str(attr[0]) + str(i) + "_map.fits -O " + join(attr[1], str(i) + "_alms.fits") + " -L " + str((2*nside) + 1) + " -m " + str(mask_fits))
+			shell_script.append("Map2Alm -I " + join(attr[0], str(i) + "_map.fits") + " -O " + join(attr[1], str(i) + "_alms.fits") + " -L " + str((2*nside) + 1) + " -m " + str(mask_fits))
 
 			shell_script.append("")
 
