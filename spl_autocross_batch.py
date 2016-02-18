@@ -67,7 +67,7 @@ def main(nside, jobname, queue, alms_dir, mask_fits, outfile_dir):
 
 		shell_script.append("")
 
-		F = str(outfile_dir) + str(single) + "single_qsub.sh"
+		F = str(outfile_dir) + "single" + str(single) + "_qsub.sh"
 		A = open(F, "w")
 		T = "\n".join(shell_script)
 		A.write(str(T))
@@ -83,5 +83,5 @@ if __name__ == "__main__":
 	IJs = "/share/splinter/ug_hj/M101/GAMA_Mask1_IJs.dat"
 	alms_dir = "/share/splinter/ug_hj/M101/sdssPZ_slices1/Alms/" # check for ////
 	mask_fits = "/share/splinter/ug_hj/M101/Mask1.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/" # check for ////
+	outfile_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/sdssPZs_1/" # check for ////
 	main(nside, jobname, queue, alms_dir, mask_fits, outfile_dir)
