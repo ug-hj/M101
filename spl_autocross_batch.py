@@ -8,7 +8,7 @@ import os
 import pandas
 import gc
 
-def main(nside, jobname, queue, root_dir, mask_fits, outfile_dir):
+def main(nside, jobname, queue, root_dir, mask, mask_fits, outfile_dir):
 	
 	slice_cross = [[0,0], [0,1], [0,2],	[0,3], [0,4], [0,5], [0,6], 
 					[1,1], [1,2], [1,3], [1,4], [1,5], [1,6], 
@@ -25,10 +25,10 @@ def main(nside, jobname, queue, root_dir, mask_fits, outfile_dir):
 
 	ANNz_dir = join(root_dir, "ANNz")
 	sdssPZ_dir = join(root_dir, "sdssPZ")
-	ANNz_alms = join(ANNz_dir, "Alms")
-	sdssPZ_alms = join(sdssPZ_dir, "Alms")
-	ANNz_Cls = join(ANNz_dir, "Cls")
-	sdssPZ_Cls = join(sdssPZ_dir, "Cls")
+	ANNz_alms = join(ANNz_dir, mask, "Alms")
+	sdssPZ_alms = join(sdssPZ_dir, mask, "Alms")
+	ANNz_Cls = join(ANNz_dir, mask, "Cls")
+	sdssPZ_Cls = join(sdssPZ_dir, mask, "Cls")
 
 	z_src_attr = [[ANNz_dir, ANNz_alms, ANNz_Cls, "ANNz"], 
 					[sdssPZ_dir, sdssPZ_alms, sdssPZ_Cls, "sdssPZ"]]
@@ -94,8 +94,9 @@ if __name__ == "__main__":
 	nside = 256
 	jobname = "cross."
 	queue = "compute"
-	IJs = "/share/splinter/ug_hj/M101/GAMA_Mask1_IJs.dat"
+	IJs = "/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat"
 	root_dir = "/share/splinter/ug_hj/M101/Slices/" # check for ////
-	mask_fits = "/share/splinter/ug_hj/M101/Mask1.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/Mask1/" # check MASK & 																			check for ////
-	main(nside, jobname, queue, root_dir, mask_fits, outfile_dir)
+	mask = "Mask3"
+	mask_fits = "/share/splinter/ug_hj/M101/Mask3.fits"
+	outfile_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/Mask3/" # check MASK & 																			check for ////
+	main(nside, jobname, queue, root_dir, mask, mask_fits, outfile_dir)

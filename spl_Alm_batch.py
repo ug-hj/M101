@@ -8,7 +8,7 @@ import os
 import pandas
 import gc
 
-def main(nside, jobname, queue, map_dir, mask_fits, outfile_dir):
+def main(nside, jobname, queue, map_dir, mask, mask_fits, outfile_dir):
 	
 	slice_number = np.arange(start=1,stop=8,step=1)
 
@@ -18,8 +18,8 @@ def main(nside, jobname, queue, map_dir, mask_fits, outfile_dir):
 	ANNz_dir = join(map_dir, "ANNz")
 	sdssPZ_dir = join(map_dir, "sdssPZ")
 
-	ANNzalm_dir = join(ANNz_dir, "Alms")
-	sdssPZalm_dir = join(sdssPZ_dir, "Alms")
+	ANNzalm_dir = join(map_dir, mask, "Alms")
+	sdssPZalm_dir = join(sdssPZ_dir, mask, "Alms")
 
 	map_alm_dirs = [[ANNz_dir, ANNzalm_dir, "ANNz"], [sdssPZ_dir, sdssPZalm_dir, "sdssPZ"]]
 
@@ -58,6 +58,7 @@ if __name__ == "__main__":
 	jobname = "alms."
 	queue = "compute"
 	map_dir = "/share/splinter/ug_hj/M101/Slices/"
-	mask_fits = "/share/splinter/ug_hj/M101/Mask1.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/qsubalms/Mask1/" # check for ////
-	main(nside, jobname, queue, map_dir, mask_fits, outfile_dir)
+	mask = "Mask3"											# CHECK MASKS
+	mask_fits = "/share/splinter/ug_hj/M101/Mask3.fits"
+	outfile_dir = "/share/splinter/ug_hj/M101/qsubalms/Mask3/" # check for ////
+	main(nside, jobname, queue, map_dir, mask, mask_fits, outfile_dir)
