@@ -1,6 +1,11 @@
 import os
+from os.path import join
 
-for q in os.listdir("/share/splinter/ug_hj/M101/Cl_qsubs/Mask1/sdssPZs_1/"):
-	if q.endswith(".sh"):
-		os.system("qsub " + "/share/splinter/ug_hj/M101/Cl_qsubs/Mask1/sdssPZs_1/" + q)
-		os.system("sleep 1")
+def batchsub(qsub_dir):
+	for q in os.listdir(qsub_dir):
+		if q.endswith(".sh"):
+			os.system("qsub " + join(qsub_dir, q))
+			os.system("sleep 1")
+
+if __name__ == "__main__":
+	qsub_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/Mask1/sdssPZs_1/"
