@@ -1,0 +1,196 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/ANNz/1_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 312761
+mask area: 116686
+Shotnoise: 5.96149e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/ANNz/2_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 634534
+mask area: 116686
+Shotnoise: 2.93841e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/ANNz/3_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 641696
+mask area: 116686
+Shotnoise: 2.90562e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/ANNz/4_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 552096
+mask area: 116686
+Shotnoise: 3.37717e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/ANNz/5_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 440520
+mask area: 116686
+Shotnoise: 4.23255e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/ANNz/6_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 276829
+mask area: 116686
+Shotnoise: 6.73528e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/ANNz/7_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 102343
+mask area: 116686
+Shotnoise: 1.82184e-05
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/sdssPZ/1_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 329997
+mask area: 116686
+Shotnoise: 5.65012e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/sdssPZ/2_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 593246
+mask area: 116686
+Shotnoise: 3.14291e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/sdssPZ/3_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 659919
+mask area: 116686
+Shotnoise: 2.82538e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/sdssPZ/4_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 549764
+mask area: 116686
+Shotnoise: 3.39149e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/sdssPZ/5_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 410552
+mask area: 116686
+Shotnoise: 4.5415e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/sdssPZ/6_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 274301
+mask area: 116686
+Shotnoise: 6.79736e-06
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+/share/splinter/ug_hj/M101/Mask3.fits
+/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat
+/share/splinter/ug_hj/M101/Slices/sdssPZ/7_map.fits
+Peebles: 1   Mask:1 /share/splinter/ug_hj/M101/Mask3.fits
+[36mORDER: 8  NSIDE: 256  LMAX: 513[0m
+read mask now!
+READ MASK
+read Ilm Jlm now!
+Calc PEEbles now!
+galaxy N: 111640
+mask area: 116686
+Shotnoise: 1.67012e-05
