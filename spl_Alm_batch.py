@@ -10,7 +10,7 @@ import gc
 
 def main(nside, jobname, queue, map_dir, mask_fits, outfile_dir):
 	
-	slice_number = np.arange(start=1,stop=5,step=1)
+	slice_number = np.arange(start=1,stop=8,step=1)
 
 	if not isdir(outfile_dir):
 		os.mkdir(outfile_dir)
