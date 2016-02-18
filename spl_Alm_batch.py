@@ -19,7 +19,7 @@ def main(nside, jobname, queue, map_dir, mask, mask_fits, outfile_dir):
 	sdssPZ_dir = join(map_dir, "sdssPZ")
 
 	ANNzalm_dir = join(map_dir, mask, "Alms")
-	sdssPZalm_dir = join(sdssPZ_dir, mask, "Alms")
+	sdssPZalm_dir = join(map_dir, mask, "Alms")
 
 	map_alm_dirs = [[ANNz_dir, ANNzalm_dir, "ANNz"], [sdssPZ_dir, sdssPZalm_dir, "sdssPZ"]]
 

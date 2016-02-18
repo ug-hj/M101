@@ -25,10 +25,10 @@ def main(nside, jobname, queue, root_dir, mask, mask_fits, outfile_dir):
 
 	ANNz_dir = join(root_dir, "ANNz")
 	sdssPZ_dir = join(root_dir, "sdssPZ")
-	ANNz_alms = join(ANNz_dir, mask, "Alms")
-	sdssPZ_alms = join(sdssPZ_dir, mask, "Alms")
-	ANNz_Cls = join(ANNz_dir, mask, "Cls")
-	sdssPZ_Cls = join(sdssPZ_dir, mask, "Cls")
+	ANNz_alms = join(root_dir, mask, "Alms")
+	sdssPZ_alms = join(root_dir, mask, "Alms")
+	ANNz_Cls = join(root_dir, mask, "Cls")
+	sdssPZ_Cls = join(root_dir, mask, "Cls")
 
 	z_src_attr = [[ANNz_dir, ANNz_alms, ANNz_Cls, "ANNz"], 
 					[sdssPZ_dir, sdssPZ_alms, sdssPZ_Cls, "sdssPZ"]]
