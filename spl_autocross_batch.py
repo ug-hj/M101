@@ -10,12 +10,12 @@ import gc
 
 def main(nside, jobname, queue, alms_dir, mask_fits, outfile_dir):
 	
-	slice_cross = [[0,0], [0,1], [0,2],	[0,3], [0,4], [0,5], [0,6], [0,7], 
-					[1,1], [1,2], [1,3], [1,4], [1,5], [1,6], [1,7], 
-					[2,2], [2,3], [2,4], [2,5], [2,6], [2,7], 
-					[3,3], [3,4], [3,5], [3,6], [3,7], 
-					[4,4], [4,5], [4,6], [4,7], 
-					[5,5], [5,6], [5,7], 
+	slice_cross = [[0,0], [0,1], [0,2],	[0,3], [0,4], [0,5], [0,6], 
+					[1,1], [1,2], [1,3], [1,4], [1,5], [1,6], 
+					[2,2], [2,3], [2,4], [2,5], [2,6], 
+					[3,3], [3,4], [3,5], [3,6], 
+					[4,4], [4,5], [4,6], 
+					[5,5], [5,6], 
 					[6,6]]
 
 	slice_single = [1, 2, 3, 4, 5, 6, 7]
@@ -88,5 +88,5 @@ if __name__ == "__main__":
 	IJs = "/share/splinter/ug_hj/M101/GAMA_Mask1_IJs.dat"
 	alms_dir = "/share/splinter/ug_hj/M101/sdssPZ_slices1/Alms/" # check for ////
 	mask_fits = "/share/splinter/ug_hj/M101/Mask1.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/Mask3/sdssPZs_1/" # check MASK & 																					check for ////
+	outfile_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/Mask1/sdssPZs_1/" # check MASK & 																					check for ////
 	main(nside, jobname, queue, alms_dir, mask_fits, outfile_dir)
