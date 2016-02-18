@@ -20,7 +20,7 @@ def main(nside, jobname, queue, map_dir, mask_fits, outfile_dir):
 					"#PBS -q " + str(queue),
 					"#PBS -N " + str(jobname) + str(i),
 					"#PBS -l nodes=1:ppn=1",
-					"#PBS -l mem=50gb",
+					"#PBS -l mem=10gb",
 					"#PBS -l walltime=120:00:00",
 					"",
 					"source /share/splinter/sbalan/Projects/LauraPCL/envvars.csh",
