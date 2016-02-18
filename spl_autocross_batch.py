@@ -8,7 +8,7 @@ import os
 import pandas
 import gc
 
-def main(nside, jobname, queue, attr[1], mask_fits, outfile_dir):
+def main(nside, jobname, queue, root_dir, mask_fits, outfile_dir):
 	
 	slice_cross = [[0,0], [0,1], [0,2],	[0,3], [0,4], [0,5], [0,6], 
 					[1,1], [1,2], [1,3], [1,4], [1,5], [1,6], 
@@ -53,7 +53,7 @@ def main(nside, jobname, queue, attr[1], mask_fits, outfile_dir):
 						"cd $PBS_O_WORKDIR",
 						""]									
 
-			shell_script.append("Alm2Cl -I " + str(attr[1]) + str(first) + "_alms.fits -O " + join(attr[2], str(first) + "x" + str(second) + "_Cls.dat") + " -P -m " + str(mask_fits) + " -R " + str(IJs) + " -T " + str(attr[0]) + str(first) + "_map.fits -N " + str(nside) + " -L " + str((2*nside) + 1) + " -c " + str(attr[1]) + str(second) + "_alms.fits " + str(attr[0]) + str(second) + "_map.fits -G")
+			shell_script.append("Alm2Cl -I " + join(attr[1], str(first) + "_alms.fits") + " -O " + join(attr[2], str(first) + "x" + str(second) + "_Cls.dat") + " -P -m " + str(mask_fits) + " -R " + str(IJs) + " -T " + join(attr[0], str(first) + "_map.fits") + " -N " + str(nside) + " -L " + str((2*nside) + 1) + " -c " + join(attr[1], str(second) + "_alms.fits") + " " + join(attr[0], str(second) + "_map.fits") + " -G")
 
 			shell_script.append("")
 
@@ -77,7 +77,7 @@ def main(nside, jobname, queue, attr[1], mask_fits, outfile_dir):
 						"cd $PBS_O_WORKDIR",
 						""]
 
-			shell_script.append("Alm2Cl -I " + str(attr[1]) + str(single) + "_alms.fits -O " + join(attr[2], str(single) + "_Cls.dat") + " -P -m " + str(mask_fits) + " -R " + str(IJs) + " -T " + str(attr[0]) + str(single) + "_map.fits -N " + str(nside) + " -L " + str((2*nside) + 1) + " -G")
+			shell_script.append("Alm2Cl -I " + join(attr[1], str(single) + "_alms.fits") + " -O " + join(attr[2], str(single) + "_Cls.dat") + " -P -m " + str(mask_fits) + " -R " + str(IJs) + " -T " + join(attr[0], str(single) + "_map.fits") + " -N " + str(nside) + " -L " + str((2*nside) + 1) + " -G")
 
 			shell_script.append("")
 
@@ -98,4 +98,4 @@ if __name__ == "__main__":
 	root_dir = "/share/splinter/ug_hj/M101/Slices/" # check for ////
 	mask_fits = "/share/splinter/ug_hj/M101/Mask1.fits"
 	outfile_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/Mask1/" # check MASK & 																			check for ////
-	main(nside, jobname, queue, attr[1], mask_fits, outfile_dir)
+	main(nside, jobname, queue, root_dir, mask_fits, outfile_dir)
