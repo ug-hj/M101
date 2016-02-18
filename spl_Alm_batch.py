@@ -15,6 +15,11 @@ def main(nside, jobname, queue, map_dir, mask_fits, outfile_dir):
 	if not isdir(outfile_dir):
 		os.mkdir(outfile_dir)
 
+	alm_dir = join(map_dir, "Alms")
+
+	if not isdir(alm_dir):
+		os.mkdir(alm_dir)
+
 	for i in slice_number:
 		shell_script = ["#!/bin/tcsh",
 					"#PBS -q " + str(queue),
@@ -28,7 +33,7 @@ def main(nside, jobname, queue, map_dir, mask_fits, outfile_dir):
 					"cd $PBS_O_WORKDIR",
 					""]									
 
-		shell_script.append("Map2Alm -I " + str(map_dir) + str(i) + "_map.fits -O " + str(map_dir) + str(i) + "_alms.fits -L " + str((2*nside) + 1) + " -m " + str(mask_fits))
+		shell_script.append("Map2Alm -I " + str(map_dir) + str(i) + "_map.fits -O " + str(alm_dir) + str(i) + "_alms.fits -L " + str((2*nside) + 1) + " -m " + str(mask_fits))
 
 		shell_script.append("")
 
@@ -47,5 +52,5 @@ if __name__ == "__main__":
 	queue = "compute"
 	map_dir = "/share/splinter/ug_hj/M101/sdssPZ_slices1/"
 	mask_fits = "/share/splinter/ug_hj/M101/Mask1.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/qsubalms/" # check for ////
+	outfile_dir = "/share/splinter/ug_hj/M101/qsubalms/Mask1/sdssPZs_1/" # check for ////
 	main(nside, jobname, queue, map_dir, mask_fits, outfile_dir)
