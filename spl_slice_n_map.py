@@ -33,7 +33,7 @@ def mapper(catalog, nside, out_dir, slice_intervals):
         z_slices.append(z_slice)
         ANNz_slices.append(ANNz_slice)
 
-    sdssPZ_dir = join(Slices, "sdssPZ")
+    sdssPZ_dir = join(out_dir, "sdssPZ")
     if not isdir(sdssPZ_dir):
         mkdir(sdssPZ_dir)
 
@@ -59,7 +59,7 @@ def mapper(catalog, nside, out_dir, slice_intervals):
         del theta, phi, cmap, count
         gc.collect()
 
-    ANNz_dir = join(Slices, "ANNz")
+    ANNz_dir = join(out_dir, "ANNz")
     if not isdir(ANNz_dir):
         mkdir(ANNz_dir)
 
