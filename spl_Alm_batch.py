@@ -18,8 +18,15 @@ def main(nside, jobname, queue, map_dir, mask, mask_fits, outfile_dir):
 	ANNz_dir = join(map_dir, "ANNz")
 	sdssPZ_dir = join(map_dir, "sdssPZ")
 
-	ANNzalm_dir = join(map_dir, mask, "Alms")
-	sdssPZalm_dir = join(map_dir, mask, "Alms")
+	ANNzalm_root = join(map_dir, mask, "ANNz")
+	sdssPZalm_root = join(map_dir, mask, "sdssPZ")
+
+	for root in [ANNzalm_root, sdssPZalm_root]:
+		if not isdir(root):
+			os.mkdir(root)
+
+	ANNzalm_dir = join(ANNzalm_root, "Alms")
+	sdssPZalm_dir = join(sdssPZalm_root, "Alms")
 
 	map_alm_dirs = [[ANNz_dir, ANNzalm_dir, "ANNz"], [sdssPZ_dir, sdssPZalm_dir, "sdssPZ"]]
 
@@ -30,7 +37,7 @@ def main(nside, jobname, queue, map_dir, mask, mask_fits, outfile_dir):
 		for i in slice_number:
 			shell_script = ["#!/bin/tcsh",
 						"#PBS -q " + str(queue),
-						"#PBS -N " + str(jobname) + str(i),
+						"#PBS -N " + str(jobname) + str(attr[2]) + str(i),
 						"#PBS -l nodes=1:ppn=1",
 						"#PBS -l mem=10gb",
 						"#PBS -l walltime=120:00:00",

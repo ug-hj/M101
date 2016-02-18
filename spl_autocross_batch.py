@@ -25,10 +25,10 @@ def main(nside, jobname, queue, root_dir, mask, mask_fits, outfile_dir):
 
 	ANNz_dir = join(root_dir, "ANNz")
 	sdssPZ_dir = join(root_dir, "sdssPZ")
-	ANNz_alms = join(root_dir, mask, "Alms")
-	sdssPZ_alms = join(root_dir, mask, "Alms")
-	ANNz_Cls = join(root_dir, mask, "Cls")
-	sdssPZ_Cls = join(root_dir, mask, "Cls")
+	ANNz_alms = join(root_dir, mask, "ANNz", "Alms")
+	sdssPZ_alms = join(root_dir, mask, "sdssPZ", "Alms")
+	ANNz_Cls = join(root_dir, mask, "ANNz", "Cls")
+	sdssPZ_Cls = join(root_dir, mask, "sdssPZ", "Cls")
 
 	z_src_attr = [[ANNz_dir, ANNz_alms, ANNz_Cls, "ANNz"], 
 					[sdssPZ_dir, sdssPZ_alms, sdssPZ_Cls, "sdssPZ"]]
@@ -43,7 +43,7 @@ def main(nside, jobname, queue, root_dir, mask, mask_fits, outfile_dir):
 			second = cross[1] + 1
 			shell_script = ["#!/bin/tcsh",
 						"#PBS -q " + str(queue),
-						"#PBS -N " + str(jobname) + str(first) + "x" + str(second),
+						"#PBS -N " + str(jobname) + str(attr[3]) + str(first) + "x" + str(second),
 						"#PBS -l nodes=1:ppn=1",
 						"#PBS -l mem=10gb",
 						"#PBS -l walltime=120:00:00",
@@ -67,7 +67,7 @@ def main(nside, jobname, queue, root_dir, mask, mask_fits, outfile_dir):
 		
 			shell_script = ["#!/bin/tcsh",
 						"#PBS -q " + str(queue),
-						"#PBS -N Cl." + str(single),
+						"#PBS -N Cl." + str(attr[3]) + str(single),
 						"#PBS -l nodes=1:ppn=1",
 						"#PBS -l mem=10gb",
 						"#PBS -l walltime=120:00:00",
