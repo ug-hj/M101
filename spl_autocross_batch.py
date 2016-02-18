@@ -89,5 +89,5 @@ if __name__ == "__main__":
 	IJs = "/share/splinter/ug_hj/M101/GAMA_Mask1_IJs.dat"
 	alms_dir = "/share/splinter/ug_hj/M101/sdssPZ_slices1/Alms/" # check for ////
 	mask_fits = "/share/splinter/ug_hj/M101/Mask1.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/sdssPZs_1/" # check for ////
+	outfile_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/Mask3/sdssPZs_1/" # check MASK & 																					check for ////
 	main(nside, jobname, queue, alms_dir, mask_fits, outfile_dir)
