@@ -44,7 +44,7 @@ def main(nside, jobname, queue, alms_dir, mask_fits, outfile_dir):
 					"cd $PBS_O_WORKDIR",
 					""]									
 
-		shell_script.append("Alm2Cl -I " + str(alms_dir) + str(first) + "_alms.fits -O " + join(Cls_dir, str(first) + "x" + str(second) + "_Cls.dat") + " -P -m " + str(mask_fits) + " -R " + str(IJs) + " -T " + str(alms_dir) + str(first) + "_map.fits -N " + str(nside) + " -L " + str((2*nside) + 1) + " -c " + str(alms_dir) + str(second) + "_alms.fits " + str(alms_dir) + str(second) + "_map.fits -G")
+		shell_script.append("Alm2Cl -I " + str(alms_dir) + str(first) + "_alms.fits -O " + join(Cls_dir, str(first) + "x" + str(second) + "_Cls.dat") + " -P -m " + str(mask_fits) + " -R " + str(IJs) + " -T " + str(map_dir) + str(first) + "_map.fits -N " + str(nside) + " -L " + str((2*nside) + 1) + " -c " + str(alms_dir) + str(second) + "_alms.fits " + str(map_dir) + str(second) + "_map.fits -G")
 
 		shell_script.append("")
 
@@ -68,7 +68,7 @@ def main(nside, jobname, queue, alms_dir, mask_fits, outfile_dir):
 					"cd $PBS_O_WORKDIR",
 					""]
 
-		shell_script.append("Alm2Cl -I " + str(alms_dir) + str(single) + "_alms.fits -O " + join(Cls_dir, str(single) + "_Cls.dat") + " -P -m " + str(mask_fits) + " -R " + str(IJs) + " -T " + str(alms_dir) + str(single) + "_map.fits -N " + str(nside) + " -L " + str((2*nside) + 1) + " -G")
+		shell_script.append("Alm2Cl -I " + str(alms_dir) + str(single) + "_alms.fits -O " + join(Cls_dir, str(single) + "_Cls.dat") + " -P -m " + str(mask_fits) + " -R " + str(IJs) + " -T " + str(map_dir) + str(single) + "_map.fits -N " + str(nside) + " -L " + str((2*nside) + 1) + " -G")
 
 		shell_script.append("")
 
