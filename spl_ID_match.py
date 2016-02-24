@@ -6,7 +6,7 @@ import random
 from os.path import join, isdir	
 from os import listdir, mkdir	
 import pandas	
-import gc	
+import gc
 	
 def match(in_IDs, in_PZs, out_matches):	
 	
