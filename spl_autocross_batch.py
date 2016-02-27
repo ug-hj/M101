@@ -94,9 +94,9 @@ if __name__ == "__main__":
 	nside = 256
 	jobname = "cross."
 	queue = "compute"
-	IJs = "/share/splinter/ug_hj/M101/GAMA_Mask3_IJs.dat"
+	IJs = "/share/splinter/ug_hj/M101/GAMA_Mask1_IJs.dat"
 	root_dir = "/share/splinter/ug_hj/M101/Slices/" # check for ////
-	mask = "Mask3"
-	mask_fits = "/share/splinter/ug_hj/M101/Mask3.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/Mask3/" # check MASK & 																			check for ////
+	mask = "Mask1"
+	mask_fits = "/share/splinter/ug_hj/M101/Mask1.fits"
+	outfile_dir = "/share/splinter/ug_hj/M101/Cl_qsubs/Mask1/" # check MASK & 																			check for ////
 	main(nside, jobname, queue, root_dir, mask, mask_fits, outfile_dir)

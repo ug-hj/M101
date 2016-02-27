@@ -65,7 +65,7 @@ if __name__ == "__main__":
 	jobname = "alms."
 	queue = "compute"
 	map_dir = "/share/splinter/ug_hj/M101/Slices/"
-	mask = "Mask3"											# CHECK MASKS
-	mask_fits = "/share/splinter/ug_hj/M101/Mask3.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/qsubalms/Mask3/" # check for ////
+	mask = "Mask1"											# CHECK MASKS
+	mask_fits = "/share/splinter/ug_hj/M101/Mask1.fits"
+	outfile_dir = "/share/splinter/ug_hj/M101/qsubalms/Mask1/" # check for ////
 	main(nside, jobname, queue, map_dir, mask, mask_fits, outfile_dir)
