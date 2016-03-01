@@ -40,6 +40,6 @@ def mapper1(catalog, nside, out_map):
 
 if __name__ == "__main__":
     catalog = "/share/splinter/ug_hj/M101/SDSS_GAMA_photozs_merged.csv"
-    nside = 2048
-    out_map = "/share/splinter/ug_hj/M101/2048_map.fits"
+    nside = 1024
+    out_map = "/share/splinter/ug_hj/M101/1024_map.fits"
     mapper1(catalog, nside, out_map)
