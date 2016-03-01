@@ -47,11 +47,11 @@ def main(nside, jobname, queue, map_dir, mask, mask_fits, outfile_dir):
 						"cd $PBS_O_WORKDIR",
 						""]									
 
-			shell_script.append("Map2Alm -I " + join(attr[0], str(i) + "_map.fits") + " -O " + join(attr[1], str(i) + "_alms.fits") + " -L " + str((2*nside) + 1) + " -m " + str(mask_fits))
+			shell_script.append("Map2Alm -I " + join(attr[0],"Ovr_" + str(i) + "_map.fits") + " -O " + join(attr[1], str(i) + "_Ovr_alms.fits") + " -L " + str((2*nside) + 1) + " -m " + str(mask_fits))
 
 			shell_script.append("")
 
-			F = join(outfile_dir, attr[2] + str(i) + "alm_qsub.sh")
+			F = join(outfile_dir, attr[2] + str(i) + "_Ovr_alm_qsub.sh")
 			A = open(F, "w")
 			T = "\n".join(shell_script)
 			A.write(str(T))
@@ -65,7 +65,7 @@ if __name__ == "__main__":
 	jobname = "alms."
 	queue = "compute"
 	map_dir = "/share/splinter/ug_hj/M101/Slices/"
-	mask = "Mask1"											# CHECK MASKS
-	mask_fits = "/share/splinter/ug_hj/M101/Mask1.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/qsubalms/Mask1/" # check for ////
+	mask = "Mask3"											# CHECK MASKS
+	mask_fits = "/share/splinter/ug_hj/M101/Mask3.fits"
+	outfile_dir = "/share/splinter/ug_hj/M101/qsubalms_Ovr/Mask3/" # check for ////
 	main(nside, jobname, queue, map_dir, mask, mask_fits, outfile_dir)
