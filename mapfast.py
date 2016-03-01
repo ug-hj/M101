@@ -39,7 +39,7 @@ def mapper1(catalog, nside, out_map):
     return None
 
 if __name__ == "__main__":
-    catalog = "/Users/Harry/M101/tinyPZ.csv"
+    catalog = "/Users/Harry/M101/tinyPZ11.csv"
     nside = 256
     out_map = "/Users/Harry/M101/tiny_map.fits"
     mapper1(catalog, nside, out_map)
