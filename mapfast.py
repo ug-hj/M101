@@ -39,7 +39,13 @@ def mapper1(catalog, nside, out_map):
     return None
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     catalog = "/share/splinter/ug_hj/M101/SDSS_GAMA_photozs_merged.csv"
     nside = 1024
     out_map = "/share/splinter/ug_hj/M101/1024_map.fits"
+=======
+    catalog = "/Users/Harry/M101/tinyPZ11.csv"
+    nside = 256
+    out_map = "/Users/Harry/M101/tiny_map.fits"
+>>>>>>> 9bde989349a61f22f365752480b49d74fb7dbee7
     mapper1(catalog, nside, out_map)
