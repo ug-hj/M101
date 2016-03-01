@@ -32,5 +32,5 @@ def normalise(map_dir):
 	return None
 
 if __name__ == '__main__':
-	map_dir = "/share/splinter/ug_hj/M101/Slices/ANNz/"
+	map_dir = "/share/splinter/ug_hj/M101/Slices/sdssPZ/"
 	normalise(map_dir)
