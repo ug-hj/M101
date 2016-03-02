@@ -14,19 +14,19 @@ def sort(dir, limit, new_dir):
 	if not isdir(new_dir):
 		mkdir(new_dir)
 
-	dir_list = listdir(dir)
+	dir_list = np.array(listdir(dir))
 	sort_cut = np.array([('o126' in item) for item in dir_list])
 	dir_list = dir_list[sort_cut]
 
 	for qsub in dir_list:
-		if (int(qsub[-7:]) > limit):
-			os.system("mv " + join(dir, qsub) + " " + new_dir)
+	#	if (int(qsub[-7:]) > limit):
+		os.system("mv " + join(dir, qsub) + " " + new_dir)
 
 	return None
 
 if __name__ == "__main__":
 	dir = '/share/splinter/ug_hj/M101/'
 	limit = 1264771
-	new_dir = '/share/splinter/ug_hj/M101/Mask3_Cl_outputs'
+	new_dir = '/share/splinter/ug_hj/M101/Mask1_Cl_outputs'
 	sort(dir, limit, new_dir)
 	
