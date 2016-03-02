@@ -11,7 +11,7 @@ import gc
 def normalise(map_dir):
 
 	map_list = np.array(listdir(map_dir))
-	ew_cut = np.array([item.endswith('map.fits') for item in map_list]) # EDIT CUTS 
+	ew_cut = np.array([item.endswith('fits') for item in map_list]) # EDIT CUTS 
 	map_list = map_list[ew_cut]
 
 	for slice_map in map_list:
@@ -21,9 +21,9 @@ def normalise(map_dir):
 		cut = count_map[nonzero]
 		mean = np.mean(cut)
 
-		overdensity_map = np.array(count_map)/mean
+		overdensity_map = (np.array(count_map)/mean) - 1
 
-		out_name = "Ovr_" + slice_map
+		out_name = "Ovr2_" + slice_map
 		out_file = join(map_dir, out_name)
 		hp.write_map(out_file, overdensity_map)
 
@@ -32,5 +32,5 @@ def normalise(map_dir):
 	return None
 
 if __name__ == '__main__':
-	map_dir = "/share/splinter/ug_hj/M101/Slices/sdssPZ/"
+	map_dir = "/share/splinter/ug_hj/M101/Slices/ANNz/"
 	normalise(map_dir)
