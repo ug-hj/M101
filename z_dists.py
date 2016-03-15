@@ -37,7 +37,7 @@ def stats(catalog, out_dir, slice_intervals):
     if not isdir(sdssPZ_dir):
         mkdir(sdssPZ_dir)
 
-    fl_1 = open(join(out_dir, 'sdss_stats.csv'), 'w')
+    fl_1 = open(join(out_dir, 'sdss_stats_wN.csv'), 'w')
 
     writer = csv.writer(fl_1)
     writer.writerow(['mean', 'var', 'N'])
@@ -76,7 +76,7 @@ def stats(catalog, out_dir, slice_intervals):
     if not isdir(ANNz_dir):
         mkdir(ANNz_dir)
 
-    fl_2 = open(join(out_dir, 'ANNz_stats.csv'), 'w')
+    fl_2 = open(join(out_dir, 'ANNz_stats_wN.csv'), 'w')
 
     writer = csv.writer(fl_2)
     writer.writerow(['mean', 'var', 'N'])
