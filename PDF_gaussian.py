@@ -27,7 +27,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv):
     for i, (zinf, zsup) in enumerate(zbins):
     #     if i > 0:
     #       break
-        ax = axes[i]
+        # ax = axes[i]
         
         mask = (annzfull["ANNZ_best"] >= zinf) & (annzfull["ANNZ_best"] < zsup)
         annzbin = annzfull[mask]
@@ -37,16 +37,16 @@ def stack(in_catalog, out_img, out_csv, outdata_csv):
         zbinpdf2 = zbinpdf/zbinpdf.max()
         mean = np.sum(bin_centres*zbinpdf)
         variance = np.sum((bin_centres**2)*zbinpdf) - mean**2    
-        norm_dist = norm.pdf(np.arange(0.0, 0.8, 0.01), loc=mean, scale=np.sqrt(variance))
-        norm_dist /= norm_dist.max()
-        ax.set_title("Normalised z-distributions = [%.2f, %.2f]" % (zinf, zsup), fontsize=7)
-        ax.bar(np.arange(0.0, 0.8, 0.01), zbinpdf2, width=0.01, color="red", edgecolor="red", alpha=0.4,
-               label=("ANNz2 PDF\nN = %d" % (len(annzpdfs))))
-        ax.plot(np.arange(0.0, 0.8, 0.01), norm_dist, label=('$\mu$ = %.3f \n$\sigma$ = %.3f' % (mean, np.sqrt(variance))))
-        ax.set_xlabel("$z$", fontsize=8)
-        ax.set_ylabel("PDF", fontsize=7)
-    #     ax.set_ylim(0, 1.05)
-        ax.legend(fontsize=10, loc='upper right')
+        # norm_dist = norm.pdf(np.arange(0.0, 0.8, 0.01), loc=mean, scale=np.sqrt(variance))
+        # norm_dist /= norm_dist.max()
+    #     ax.set_title("Normalised z-distributions = [%.2f, %.2f]" % (zinf, zsup), fontsize=7)
+    #     ax.bar(np.arange(0.0, 0.8, 0.01), zbinpdf2, width=0.01, color="red", edgecolor="red", alpha=0.4,
+    #            label=("ANNz2 PDF\nN = %d" % (len(annzpdfs))))
+    #     ax.plot(np.arange(0.0, 0.8, 0.01), norm_dist, label=('$\mu$ = %.3f \n$\sigma$ = %.3f' % (mean, np.sqrt(variance))))
+    #     ax.set_xlabel("$z$", fontsize=8)
+    #     ax.set_ylabel("PDF", fontsize=7)
+    # #     ax.set_ylim(0, 1.05)
+    #     ax.legend(fontsize=10, loc='upper right')
 
         Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.3f' % mean, '%.3f' % np.sqrt(variance)]
         writer.writerow(Gauss)
@@ -64,8 +64,9 @@ def stack(in_catalog, out_img, out_csv, outdata_csv):
 
 
     fl.close()
-    fig.tight_layout()
-    plt.savefig(out_img)
+    fl2.close()
+    # fig.tight_layout()
+    # plt.savefig(out_img)
 
 
     return None
