@@ -1,0 +1,65 @@
+from __future__ import print_function, division
+import numpy as np
+import csv
+import pandas
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+import seaborn
+
+def stack(in_catalog, out_img, out_csv):
+    annzfull = pandas.read_csv(in_catalog)
+
+    zbins = np.array([np.arange(0.0, 0.4, 0.05), np.arange(0.05, 0.45, 0.05)]).T
+    zbins = np.vstack([zbins, [0.4, 3.0]])
+
+
+    fig, axtup = plt.subplots(nrows=3, ncols=3, figsize=(10, 10))
+    fig.subplots_adjust(hspace=0, wspace=0)
+
+    axes = [elem for row in axtup for elem in row]
+
+    bin_centres = np.arange(0.005, 0.805, 0.01)
+
+    fl = open(out_csv, 'w')
+    writer = csv.writer(fl)
+    writer.writerow(['z_min', 'z_max', 'mean', 'st.dev'])
+
+    for i, (zinf, zsup) in enumerate(zbins):
+    #     if i > 0:
+    #       break
+        ax = axes[i]
+        
+        mask = (annzfull["ANNZ_best"] >= zinf) & (annzfull["ANNZ_best"] < zsup)
+        annzbin = annzfull[mask]
+        annzpdfs = annzbin.ix[:, 15:]
+        zbinpdf = annzpdfs.sum().as_matrix()
+        zbinpdf /= len(annzpdfs)
+        zbinpdf2 = zbinpdf/zbinpdf.max()
+        mean = np.sum(bin_centres*zbinpdf)
+        variance = np.sum((bin_centres**2)*zbinpdf) - mean**2    
+        norm_dist = norm.pdf(np.arange(0.0, 0.8, 0.01), loc=mean, scale=np.sqrt(variance))
+        norm_dist /= norm_dist.max()
+        ax.set_title("Normalised z-distributions = [%.2f, %.2f]" % (zinf, zsup), fontsize=7)
+        ax.bar(np.arange(0.0, 0.8, 0.01), zbinpdf2, width=0.01, color="red", edgecolor="red", alpha=0.4,
+               label=("ANNz2 PDF\nN = %d" % (len(annzpdfs))))
+        ax.plot(np.arange(0.0, 0.8, 0.01), norm_dist, label=('$\mu$ = %.3f \n$\sigma$ = %.3f' % (mean, np.sqrt(variance))))
+        ax.set_xlabel("$z$", fontsize=8)
+        ax.set_ylabel("PDF", fontsize=7)
+    #     ax.set_ylim(0, 1.05)
+        ax.legend(fontsize=10, loc='upper right')
+
+        Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.3f' % mean, '%.3f' % np.sqrt(variance)]
+        writer.writerow(Gauss)
+
+    fl.close()
+    fig.tight_layout()
+    plt.savefig(out_img)
+
+
+    return None
+
+if __name__ == "__main__":
+    in_catalog = "/share/splinter/moraes/2016-02-17_SDSS_annz2_photoz/SDSS_ANNZ2_merged.csv"
+    out_img = "/share/splinter/ug_hj/M101/PDF_stack1.png"
+    out_csv = "/share/splinter/ug_hj/M101/PDF_Gauss1.csv"
+    stack(in_catalog, out_img, out_csv)
