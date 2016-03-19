@@ -4,9 +4,9 @@ import csv
 import pandas
 import matplotlib.pyplot as plt
 from scipy.stats import norm
-import seaborn
+#import seaborn
 
-def stack(in_catalog, out_img, out_csv):
+def stack(in_catalog, out_img, out_csv, outdata_csv):
     annzfull = pandas.read_csv(in_catalog)
 
     zbins = np.array([np.arange(0.0, 0.4, 0.05), np.arange(0.05, 0.45, 0.05)]).T
@@ -51,6 +51,18 @@ def stack(in_catalog, out_img, out_csv):
         Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.3f' % mean, '%.3f' % np.sqrt(variance)]
         writer.writerow(Gauss)
 
+        csv_ext = str(i) + '.csv'
+        outdata = outdata_csv + csv_ext
+
+        fl2 = open(outdata, 'w')
+        writer2 = csv.writer(fl2)
+        writer2.writerow(['z_bin_centre', 'PDF_val'])
+
+        Stack = zip(bin_centres, zbinpdf2)
+        for values in Stack:
+            writer2.writerow(values)
+
+
     fl.close()
     fig.tight_layout()
     plt.savefig(out_img)
@@ -62,4 +74,5 @@ if __name__ == "__main__":
     in_catalog = "/share/splinter/moraes/2016-02-17_SDSS_annz2_photoz/SDSS_ANNZ2_merged.csv"
     out_img = "/share/splinter/ug_hj/M101/PDF_stack1.png"
     out_csv = "/share/splinter/ug_hj/M101/PDF_Gauss1.csv"
-    stack(in_catalog, out_img, out_csv)
+    outdata_csv = "/share/splinter/ug_hj/M101/PDF_stack_dat"
+    stack(in_catalog, out_img, out_csv, outdata_csv)
