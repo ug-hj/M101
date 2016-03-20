@@ -13,10 +13,10 @@ def stack(in_catalog, out_img, out_csv, outdata_csv):
     zbins = np.vstack([zbins, [0.4, 3.0]])
 
 
-    fig, axtup = plt.subplots(nrows=3, ncols=3, figsize=(10, 10))
-    fig.subplots_adjust(hspace=0, wspace=0)
+    #fig, axtup = plt.subplots(nrows=3, ncols=3, figsize=(10, 10))
+    #fig.subplots_adjust(hspace=0, wspace=0)
 
-    axes = [elem for row in axtup for elem in row]
+    #axes = [elem for row in axtup for elem in row]
 
     bin_centres = np.arange(0.005, 0.805, 0.01)
 
