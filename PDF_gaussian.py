@@ -22,7 +22,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv):
 
     fl = open(out_csv, 'w')
     writer = csv.writer(fl)
-    writer.writerow(['z_min', 'z_max', 'mean', 'st.dev'])
+    writer.writerow(['z_min', 'z_max', 'mean', 'st.dev', 'N_gal'])
 
     for i, (zinf, zsup) in enumerate(zbins):
     #     if i > 0:
@@ -48,7 +48,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv):
     # #     ax.set_ylim(0, 1.05)
     #     ax.legend(fontsize=10, loc='upper right')
 
-        Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.3f' % mean, '%.3f' % np.sqrt(variance)]
+        Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.3f' % mean, '%.3f' % np.sqrt(variance), len(annzpdfs)]
         writer.writerow(Gauss)
 
         csv_ext = str(i) + '.csv'
