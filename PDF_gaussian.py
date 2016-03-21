@@ -19,16 +19,17 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
     #axes = [elem for row in axtup for elem in row]
 
     bin_centres = np.arange(0.005, 0.805, 0.01)
-    fine_binning = np.array([np.arange(0., 0.800, 0.001), 
-                             np.arange(0.005, 0.805, 0.001)]).T
 
     fl = open(out_csv, 'w')
     writer = csv.writer(fl)
     writer.writerow(['z_min', 'z_max', 'mean', 'st.dev', 'N_gal'])
 
-    fl3 = open(dNdz_csv, 'w')
-    writer3 = csv.writer(fl3)
-    writer3.writerow(['z_mid', 'N_gal'])    
+    # fl3 = open(dNdz_csv, 'w')
+    # writer3 = csv.writer(fl3)
+    # writer3.writerow(['z_mid', 'N_1', 'N_2', 'N_3', 'N_4', 'N_5', 'N_6', 'N_7'])
+    inner_bins = np.arange(0.049, 0.801, 0.001) # <---- CHANGE STEP? 
+    z_mids = inner_bins + 0.0005
+    DNDZ = z_mids[:-1]
 
     for i, (zinf, zsup) in enumerate(zbins):
     #     if i > 0:
@@ -37,7 +38,6 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
         
         mask = (annzfull["ANNZ_best"] >= zinf) & (annzfull["ANNZ_best"] < zsup)
         annzbin = annzfull[mask]
-        annzbest = annzbin['ANNZ_best']
         annzpdfs = annzbin.ix[:, 15:]
         zbinpdf = annzpdfs.sum().as_matrix()
         zbinpdf /= len(annzpdfs)
@@ -53,14 +53,13 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
     #     ax.set_xlabel("$z$", fontsize=8)
     #     ax.set_ylabel("PDF", fontsize=7)
     # #     ax.set_ylim(0, 1.05)
-    #     ax.legend(fontsize=10, loc='upper right')
+    #     ax.legend(fontsize=10, loc='upper right') 
 
-        # inner_bins = np.arange(zinf, zsup+0.001, 0.001)
-        # dndz = np.histogram(annzbest, bins=inner_bins)
-        # dndz_flip = [dndz[:, 1], dndz[:, 0]
-        # for values in dndz_flip:
-        #     writer3.writerow(values)        
-
+        if (zinf != 0.) & (zsup != 3.0):
+            annzbest = annzbin['ANNZ_best']
+            dndz = np.histogram(annzbest, bins=inner_bins)
+            
+            DNDZ = np.column_stack((DNDZ, dndz[0]))
 
         Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.3f' % mean, '%.3f' % np.sqrt(variance), len(annzpdfs)]
         writer.writerow(Gauss)
@@ -74,12 +73,16 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
 
         Stack = zip(bin_centres, zbinpdf2)
         for values in Stack:
-            writer2.writerow(values)
-
+            writer2.writerow(values)      
+    
+    # print(DNDZ.shape)
+    np.savetxt(dNdz_csv, DNDZ, delimiter=",", fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
+    # for values in DNDZ:
+    #     writer3.writerow(values)
 
     fl.close()
     fl2.close()
-    fl3.close()
+    # fl3.close()
     # fig.tight_layout()
     # plt.savefig(out_img)
 
