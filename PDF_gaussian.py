@@ -39,10 +39,10 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
         mask = (annzfull["ANNZ_best"] >= zinf) & (annzfull["ANNZ_best"] < zsup)
         annzbin = annzfull[mask]
         annzpdfs = annzbin.ix[:, 15:]
-        zbinpdf = annzpdfs.sum().as_matrix()
-        zbinpdf_tot = zbinpdf
-        zbinpdf /= len(annzpdfs)
-        print(np.sum(zbinpdf))
+        zbinpdf_tot = annzpdfs.sum().as_matrix()
+        zbinpdf = zbinpdf_tot/len(annzpdfs)
+        print(zbinpdf_tot[0])
+        # zbinpdf /= len(annzpdfs)
         zbinpdf2 = zbinpdf/zbinpdf.max()
         mean = np.sum(bin_centres*zbinpdf)
         variance = np.sum((bin_centres**2)*zbinpdf) - mean**2    
