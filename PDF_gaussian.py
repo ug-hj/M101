@@ -40,7 +40,9 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
         annzbin = annzfull[mask]
         annzpdfs = annzbin.ix[:, 15:]
         zbinpdf = annzpdfs.sum().as_matrix()
+        zbinpdf_tot = zbinpdf
         zbinpdf /= len(annzpdfs)
+        print(np.sum(zbinpdf))
         zbinpdf2 = zbinpdf/zbinpdf.max()
         mean = np.sum(bin_centres*zbinpdf)
         variance = np.sum((bin_centres**2)*zbinpdf) - mean**2    
@@ -69,9 +71,9 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
 
         fl2 = open(outdata, 'w')
         writer2 = csv.writer(fl2)
-        writer2.writerow(['z_bin_centre', 'PDF_val'])
+        writer2.writerow(['z_bin_centre', 'PDF_val', 'PDF_tot'])
 
-        Stack = zip(bin_centres, zbinpdf2)
+        Stack = zip(bin_centres, zbinpdf2, zbinpdf_tot)
         for values in Stack:
             writer2.writerow(values)      
     
