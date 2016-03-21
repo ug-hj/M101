@@ -41,7 +41,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
         annzpdfs = annzbin.ix[:, 15:]
         zbinpdf_tot = annzpdfs.sum().as_matrix()
         zbinpdf = zbinpdf_tot/len(annzpdfs)
-        print(zbinpdf_tot[0])
+    #    print(zbinpdf_tot[0])
         # zbinpdf /= len(annzpdfs)
         zbinpdf2 = zbinpdf/zbinpdf.max()
         mean = np.sum(bin_centres*zbinpdf)
