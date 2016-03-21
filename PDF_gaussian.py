@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 #import seaborn
 
-def stack(in_catalog, out_img, out_csv, outdata_csv):
+def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
     annzfull = pandas.read_csv(in_catalog)
 
     zbins = np.array([np.arange(0.0, 0.4, 0.05), np.arange(0.05, 0.45, 0.05)]).T
@@ -19,10 +19,16 @@ def stack(in_catalog, out_img, out_csv, outdata_csv):
     #axes = [elem for row in axtup for elem in row]
 
     bin_centres = np.arange(0.005, 0.805, 0.01)
+    fine_binning = np.array([np.arange(0., 0.800, 0.001), 
+                             np.arange(0.005, 0.805, 0.001)]).T
 
     fl = open(out_csv, 'w')
     writer = csv.writer(fl)
     writer.writerow(['z_min', 'z_max', 'mean', 'st.dev', 'N_gal'])
+
+    fl3 = open(dNdz_csv, 'w')
+    writer3 = csv.writer(fl3)
+    writer3.writerow(['z_mid', 'N_gal'])    
 
     for i, (zinf, zsup) in enumerate(zbins):
     #     if i > 0:
@@ -31,6 +37,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv):
         
         mask = (annzfull["ANNZ_best"] >= zinf) & (annzfull["ANNZ_best"] < zsup)
         annzbin = annzfull[mask]
+        annzbest = annzbin['ANNZ_best']
         annzpdfs = annzbin.ix[:, 15:]
         zbinpdf = annzpdfs.sum().as_matrix()
         zbinpdf /= len(annzpdfs)
@@ -47,6 +54,13 @@ def stack(in_catalog, out_img, out_csv, outdata_csv):
     #     ax.set_ylabel("PDF", fontsize=7)
     # #     ax.set_ylim(0, 1.05)
     #     ax.legend(fontsize=10, loc='upper right')
+
+        # inner_bins = np.arange(zinf, zsup+0.001, 0.001)
+        # dndz = np.histogram(annzbest, bins=inner_bins)
+        # dndz_flip = [dndz[:, 1], dndz[:, 0]
+        # for values in dndz_flip:
+        #     writer3.writerow(values)        
+
 
         Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.3f' % mean, '%.3f' % np.sqrt(variance), len(annzpdfs)]
         writer.writerow(Gauss)
@@ -65,6 +79,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv):
 
     fl.close()
     fl2.close()
+    fl3.close()
     # fig.tight_layout()
     # plt.savefig(out_img)
 
@@ -76,4 +91,5 @@ if __name__ == "__main__":
     out_img = "/share/splinter/ug_hj/M101/PDF_stack1.png"
     out_csv = "/share/splinter/ug_hj/M101/PDF_Gauss1.csv"
     outdata_csv = "/share/splinter/ug_hj/M101/PDF_stack_dat"
-    stack(in_catalog, out_img, out_csv, outdata_csv)
+    dNdz_csv = "/share/splinter/ug_hj/M101/PDF_dNdz.csv"
+    stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv)
