@@ -27,8 +27,8 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
     # fl3 = open(dNdz_csv, 'w')
     # writer3 = csv.writer(fl3)
     # writer3.writerow(['z_mid', 'N_1', 'N_2', 'N_3', 'N_4', 'N_5', 'N_6', 'N_7'])
-    inner_bins = np.arange(0.049, 0.401, 0.001) # <---- CHANGE STEP? 
-    z_mids = inner_bins + 0.0005
+    inner_bins = np.arange(0.040, 0.41, 0.01) # <---- CHANGE STEP? 
+    z_mids = inner_bins + 0.005
     DNDZ = z_mids[:-1]
 
     for i, (zinf, zsup) in enumerate(zbins):
