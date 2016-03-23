@@ -8,5 +8,5 @@ def batchsub(qsub_dir):
 	#		os.system("sleep 1")
 
 if __name__ == "__main__":
-	qsub_dir = "/share/splinter/ug_hj/M101/Cl_qsubs_Ovr2/Mask3/"
+	qsub_dir = "/share/splinter/ug_hj/M101/Cl_qsubs_Ovr2/Mask2/"
 	batchsub(qsub_dir)

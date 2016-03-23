@@ -47,6 +47,6 @@ if __name__ == "__main__":
 	queue = "compute"
 	l_max = 510
 	bin_size = 10
-	mask_fits = "/share/splinter/ug_hj/M101/Mask3.fits"
-	outfile_dir = "/share/splinter/ug_hj/M101/PCL/Mask3/" # check for ////
+	mask_fits = "/share/splinter/ug_hj/M101/Mask2.fits"
+	outfile_dir = "/share/splinter/ug_hj/M101/PCL/Mask2/" # check for ////
 	main(nside, jobname, queue, l_max, bin_size, mask_fits, outfile_dir)
