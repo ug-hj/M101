@@ -39,16 +39,16 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
     #       break
         # ax = axes[i]
         
-        mask = (annzfull["ANNZ_best"] >= zinf) & (annzfull["ANNZ_best"] < zsup)
-        annzbin = annzfull[mask]
-        annzpdfs = annzbin.ix[:, 15:]
-        zbinpdf_tot = annzpdfs.sum().as_matrix()
-        zbinpdf = zbinpdf_tot/len(annzpdfs)
+        #mask = (annzfull["ANNZ_best"] >= zinf) & (annzfull["ANNZ_best"] < zsup)
+        #annzbin = annzfull[mask]
+        #annzpdfs = annzbin.ix[:, 15:]
+        #zbinpdf_tot = annzpdfs.sum().as_matrix()
+   #     zbinpdf = zbinpdf_tot/len(annzpdfs)
     #    print(zbinpdf_tot[0])
         # zbinpdf /= len(annzpdfs)
-        zbinpdf2 = zbinpdf/zbinpdf.max()
-        mean = np.sum(bin_centres*zbinpdf)
-        variance = np.sum((bin_centres**2)*zbinpdf) - mean**2    
+   #     zbinpdf2 = zbinpdf/zbinpdf.max()
+   #     mean = np.sum(bin_centres*zbinpdf)
+   #     variance = np.sum((bin_centres**2)*zbinpdf) - mean**2    
         # norm_dist = norm.pdf(np.arange(0.0, 0.8, 0.01), loc=mean, scale=np.sqrt(variance))
         # norm_dist /= norm_dist.max()
     #     ax.set_title("Normalised z-distributions = [%.2f, %.2f]" % (zinf, zsup), fontsize=7)
@@ -60,25 +60,25 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
     # #     ax.set_ylim(0, 1.05)
     #     ax.legend(fontsize=10, loc='upper right') 
 
-        if (zinf != 0.) & (zsup != 3.0):
-            annzbest = annzbin['ANNZ_best']
-            dndz = np.histogram(annzbest, bins=inner_bins)
+  #      if (zinf != 0.) & (zsup != 3.0):
+  #          annzbest = annzbin['ANNZ_best']
+  #          dndz = np.histogram(annzbest, bins=inner_bins)
             
-            DNDZ = np.column_stack((DNDZ, dndz[0]))
+ #           DNDZ = np.column_stack((DNDZ, dndz[0]))
 
-        Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.4f' % mean, '%.4f' % np.sqrt(variance), len(annzpdfs)]
-        writer.writerow(Gauss)
+ #       Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.4f' % mean, '%.4f' % np.sqrt(variance), len(annzpdfs)]
+#        writer.writerow(Gauss)
 
-        csv_ext = str(i) + '.csv'
-        outdata = outdata_csv + csv_ext
+     #   csv_ext = str(i) + '.csv'
+     #   outdata = outdata_csv + csv_ext
 
-        fl2 = open(outdata, 'w')
-        writer2 = csv.writer(fl2)
-        writer2.writerow(['z_bin_centre', 'PDF_val', 'PDF_tot'])
+      #  fl2 = open(outdata, 'w')
+     #   writer2 = csv.writer(fl2)
+    #    writer2.writerow(['z_bin_centre', 'PDF_val', 'PDF_tot'])
 
-        Stack = zip(bin_centres, zbinpdf2, zbinpdf_tot)
-        for values in Stack:
-            writer2.writerow(values)
+  #      Stack = zip(bin_centres, zbinpdf2, zbinpdf_tot)
+   #     for values in Stack:
+    #        writer2.writerow(values)
 
         if (zinf != 0.) & (zsup != 3.0):
             mask2 = (annzfull["zspec"] >= zinf) & (annzfull["zspec"] < zsup)
@@ -89,14 +89,14 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
 
     
     # print(DNDZ.shape)
-    np.savetxt(dNdz_csv, DNDZ, delimiter=",", fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
+#    np.savetxt(dNdz_csv, DNDZ, delimiter=",", fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
     # for values in DNDZ:
     #     writer3.writerow(values)
-    np.savetext('/share/splinter/ug_hj/M101/GAMA_hist.dat', Gcsv, delimiter=',',
-                        fmt="%.4f, %.d")
+    np.savetxt('/share/splinter/ug_hj/M101/GAMA_hist.dat', Gcsv, delimiter=',',
+                        fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
 
-    fl.close()
-    fl2.close()
+   # fl.close()
+   # fl2.close()
     # fl3.close()
     # fig.tight_layout()
     # plt.savefig(out_img)
