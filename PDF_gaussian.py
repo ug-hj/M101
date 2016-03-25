@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 #import seaborn
 
-def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
+def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA):
     annzfull = pandas.read_csv(in_catalog)
 
     zbins = np.array([np.arange(0.0, 0.4, 0.05), np.arange(0.05, 0.45, 0.05)]).T
@@ -20,7 +20,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
 
     bin_centres = np.arange(0.005, 0.805, 0.01)
 
-    if 'GAMA_photoz_merged' in in_catalog:
+    if GAMA != True:
         fl = open(out_csv, 'w')
         writer = csv.writer(fl)
         writer.writerow(['z_min', 'z_max', 'mean', 'st.dev', 'N_gal'])
@@ -40,7 +40,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
     #       break
         # ax = axes[i]
 
-        if 'GAMA_photoz_merged' in in_catalog:
+        if GAMA != True:
         
             mask = (annzfull["ANNZ_best"] >= zinf) & (annzfull["ANNZ_best"] < zsup)
             annzbin = annzfull[mask]
@@ -83,7 +83,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
             for values in Stack:
                writer2.writerow(values)
 
-        elif 'ANNZ2_GAMA_full' in in_catalog:
+        else:
 
             mask2 = (annzfull["zspec"] >= zinf) & (annzfull["zspec"] < zsup)
             gama_z = annzfull["zspec"]
@@ -96,10 +96,10 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
 #    np.savetxt(dNdz_csv, DNDZ, delimiter=",", fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
     # for values in DNDZ:
     #     writer3.writerow(values)
-    if 'ANNZ2_GAMA_full' in in_catalog:
+    if GAMA == True:
         np.savetxt('/share/splinter/ug_hj/M101/GAMA_hist.dat', Gcsv, delimiter=',', fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
 
-    if 'GAMA_photoz_merged' in in_catalog:
+    if GAMA != True:
         fl.close()
         fl2.close()
         fl3.close()
@@ -116,4 +116,4 @@ if __name__ == "__main__":
     out_csv = "/share/splinter/ug_hj/M101/PDF_Gauss1.csv"
     outdata_csv = "/share/splinter/ug_hj/M101/PDF_stack_dat"
     dNdz_csv = "/share/splinter/ug_hj/M101/PDF_dNdz.csv"
-    stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv)
+    stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA)
