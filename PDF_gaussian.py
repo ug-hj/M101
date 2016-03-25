@@ -66,18 +66,18 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
             
  #           DNDZ = np.column_stack((DNDZ, dndz[0]))
 
-       Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.4f' % mean, '%.4f' % np.sqrt(variance), len(annzpdfs)]
-       writer.writerow(Gauss)
+        Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.4f' % mean, '%.4f' % np.sqrt(variance), len(annzpdfs)]
+        writer.writerow(Gauss)
 
-       csv_ext = str(i) + '.csv'
-       outdata = outdata_csv + csv_ext
+        csv_ext = str(i) + '.csv'
+        outdata = outdata_csv + csv_ext
 
-       fl2 = open(outdata, 'w')
-       writer2 = csv.writer(fl2)
-       writer2.writerow(['z_bin_centre', 'PDF_val', 'PDF_tot'])
+        fl2 = open(outdata, 'w')
+        writer2 = csv.writer(fl2)
+        writer2.writerow(['z_bin_centre', 'PDF_val', 'PDF_tot'])
 
-       Stack = zip(bin_centres, zbinpdf2, zbinpdf_tot)
-       for values in Stack:
+        Stack = zip(bin_centres, zbinpdf2, zbinpdf_tot)
+        for values in Stack:
            writer2.writerow(values)
 
         # if (zinf != 0.) & (zsup != 3.0):
@@ -93,7 +93,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
     # for values in DNDZ:
     #     writer3.writerow(values)
     # np.savetxt('/share/splinter/ug_hj/M101/GAMA_hist.dat', Gcsv, delimiter=',',
-                        fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
+                        # fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
 
     fl.close()
     fl2.close()
