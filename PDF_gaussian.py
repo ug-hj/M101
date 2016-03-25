@@ -32,8 +32,8 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
         z_mids = inner_bins + 0.0005
         DNDZ = z_mids[:-1]
 
-    # bin_centres2 = np.arange(0., 0.8, 0.01)
-    # Gcsv = bin_centres2
+    bin_centres2 = np.arange(0., 0.8, 0.01)
+    Gcsv = bin_centres2
 
     for i, (zinf, zsup) in enumerate(zbins):
     #     if i > 0:
