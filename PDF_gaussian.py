@@ -31,6 +31,9 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
     z_mids = inner_bins + 0.0005
     DNDZ = z_mids[:-1]
 
+    bin_centres2 = np.arange(0., 0.8, 0.01)
+    Gcsv = bin_centres2
+
     for i, (zinf, zsup) in enumerate(zbins):
     #     if i > 0:
     #       break
@@ -75,12 +78,22 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
 
         Stack = zip(bin_centres, zbinpdf2, zbinpdf_tot)
         for values in Stack:
-            writer2.writerow(values)      
+            writer2.writerow(values)
+
+        if (zinf != 0.) & (zsup != 3.0):
+            mask2 = (annzfull["zspec"] >= zinf) & (annzfull["zspec"] < zsup)
+            gama_z = annzfull["zspec"]
+            gama_z = gama_z[mask2]
+            z_hist = np.histogram(gama_z, bins=80, range=(0., 0.8))
+            Gcsv = np.column_stack((Gcsv, z_hist[0]))
+
     
     # print(DNDZ.shape)
     np.savetxt(dNdz_csv, DNDZ, delimiter=",", fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
     # for values in DNDZ:
     #     writer3.writerow(values)
+    np.savetext('/share/splinter/ug_hj/M101/GAMA_hist.dat', Gcsv, delimiter=',',
+                        fmt="%.4f, %.d")
 
     fl.close()
     fl2.close()
@@ -92,7 +105,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
     return None
 
 if __name__ == "__main__":
-    in_catalog = "/share/splinter/moraes/2016-02-17_SDSS_annz2_photoz/SDSS_ANNZ2_merged.csv"
+    in_catalog = "/share/splinter/moraes/2016-02-17_SDSS_annz2_photoz/ANNZ2_GAMA_full_matched.csv"
     out_img = "/share/splinter/ug_hj/M101/PDF_stack1.png"
     out_csv = "/share/splinter/ug_hj/M101/PDF_Gauss1.csv"
     outdata_csv = "/share/splinter/ug_hj/M101/PDF_stack_dat"
