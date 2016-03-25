@@ -63,7 +63,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
             
             DNDZ = np.column_stack((DNDZ, dndz[0]))
 
-        Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.3f' % mean, '%.3f' % np.sqrt(variance), len(annzpdfs)]
+        Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.4f' % mean, '%.4f' % np.sqrt(variance), len(annzpdfs)]
         writer.writerow(Gauss)
 
         csv_ext = str(i) + '.csv'
