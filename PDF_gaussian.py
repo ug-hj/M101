@@ -7,6 +7,12 @@ from scipy.stats import norm
 #import seaborn
 
 def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA):
+
+    if GAMA == True:
+        in_catalog = in_catalog[0]
+    else:
+        in_catalog = in_catalog[1]
+        
     annzfull = pandas.read_csv(in_catalog)
 
     zbins = np.array([np.arange(0.0, 0.4, 0.05), np.arange(0.05, 0.45, 0.05)]).T
@@ -110,10 +116,10 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA):
     return None
 
 if __name__ == "__main__":
-    in_catalog = "/share/splinter/moraes/2016-02-17_SDSS_annz2_photoz/ANNZ2_GAMA_full_matched.csv"
-    # /share/splinter/moraes/2016-02-18_SDSS_GAMA_photoz_merged/SDSS_GAMA_photozs_merged.csv
+    in_catalog = ["/share/splinter/moraes/2016-02-17_SDSS_annz2_photoz/ANNZ2_GAMA_full_matched.csv", "/share/splinter/moraes/2016-02-18_SDSS_GAMA_photoz_merged/SDSS_GAMA_photozs_merged.csv"]
     out_img = "/share/splinter/ug_hj/M101/PDF_stack1.png"
     out_csv = "/share/splinter/ug_hj/M101/PDF_Gauss1.csv"
     outdata_csv = "/share/splinter/ug_hj/M101/PDF_stack_dat"
     dNdz_csv = "/share/splinter/ug_hj/M101/PDF_dNdz.csv"
+    GAMA = False
     stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA)
