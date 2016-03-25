@@ -97,8 +97,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv):
     # for values in DNDZ:
     #     writer3.writerow(values)
     if 'ANNZ2_GAMA_full' in in_catalog:
-    np.savetxt('/share/splinter/ug_hj/M101/GAMA_hist.dat', Gcsv, delimiter=',',
-                        fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
+        np.savetxt('/share/splinter/ug_hj/M101/GAMA_hist.dat', Gcsv, delimiter=',', fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
 
     if 'GAMA_photoz_merged' in in_catalog:
         fl.close()
