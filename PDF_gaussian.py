@@ -34,8 +34,8 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA):
         fl3 = open(dNdz_csv, 'w')
         writer3 = csv.writer(fl3)
         writer3.writerow(['z_mid', 'N_1', 'N_2', 'N_3', 'N_4', 'N_5', 'N_6', 'N_7'])
-        inner_bins = np.arange(0.049, 0.401, 0.001) # <---- CHANGE STEP? 
-        z_mids = inner_bins + 0.0005
+        inner_bins = np.arange(0.005, 0.810, 0.01) # <---- CHANGE STEP? 
+        z_mids = inner_bins
         DNDZ = z_mids[:-1]
 
     bin_centres2 = np.arange(0., 0.8, 0.01)
@@ -69,11 +69,11 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA):
         # #     ax.set_ylim(0, 1.05)
         #     ax.legend(fontsize=10, loc='upper right') 
 
-      #      if (zinf != 0.) & (zsup != 3.0):
-      #          annzbest = annzbin['ANNZ_best']
-      #          dndz = np.histogram(annzbest, bins=inner_bins)
-                
-     #           DNDZ = np.column_stack((DNDZ, dndz[0]))
+        
+            annzbest = annzbin['ANNZ_best']
+            dndz = np.histogram(annzbest, bins=inner_bins)
+            
+            DNDZ = np.column_stack((DNDZ, dndz[0]))
 
             Gauss = ['%.2f' % zinf, '%.2f' % zsup, '%.4f' % mean, '%.4f' % np.sqrt(variance), len(annzpdfs)]
             writer.writerow(Gauss)
@@ -97,11 +97,10 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA):
             z_hist = np.histogram(gama_z, bins=80, range=(0., 0.8))
             Gcsv = np.column_stack((Gcsv, z_hist[0]))
 
-    
-    # print(DNDZ.shape)
-#    np.savetxt(dNdz_csv, DNDZ, delimiter=",", fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
-    # for values in DNDZ:
-    #     writer3.writerow(values)
+    print(DNDZ.shape)
+    np.savetxt(dNdz_csv, DNDZ, delimiter=",", fmt="%.3f, %d, %d, %d, %d, %d, %d, %d, %d, %d")
+    for values in DNDZ:
+        writer3.writerow(values)
     if GAMA == True:
         np.savetxt('/share/splinter/ug_hj/M101/GAMA_hist.dat', Gcsv, delimiter=',', fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
 
