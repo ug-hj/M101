@@ -91,7 +91,7 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA):
 
         else:
 
-            mask2 = (annzfull["zspec"] >= zinf) & (annzfull["zspec"] < zsup)
+            mask2 = (annzfull["ANNZ_best"] >= zinf) & (annzfull["ANNZ_best"] < zsup)
             gama_z = annzfull["zspec"]
             gama_z = gama_z[mask2]
             z_hist = np.histogram(gama_z, bins=80, range=(0., 0.8))
