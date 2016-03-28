@@ -39,7 +39,8 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA):
         DNDZ = z_mids[:-1]
 
     bin_centres2 = np.arange(0., 0.8, 0.01)
-    Gcsv = bin_centres2
+    Gcsv = bin_centres
+    ganz_pdfs = bin_centres
 
     for i, (zinf, zsup) in enumerate(zbins):
     #     if i > 0:
@@ -97,16 +98,25 @@ def stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA):
             z_hist = np.histogram(gama_z, bins=80, range=(0., 0.8))
             Gcsv = np.column_stack((Gcsv, z_hist[0]))
 
-    print(DNDZ.shape)
-    np.savetxt(dNdz_csv, DNDZ, delimiter=",", fmt="%.3f, %d, %d, %d, %d, %d, %d, %d, %d, %d")
-    for values in DNDZ:
-        writer3.writerow(values)
+            annzbin = annzfull[mask2]
+            annzpdfs = annzbin.ix[:, 11:]
+            zbinpdf_tot = annzpdfs.sum().as_matrix()
+            zbinpdf = zbinpdf_tot/len(annzpdfs)
+            zbinpdf2 = zbinpdf/zbinpdf.max()
+            # mean = np.sum(bin_centres*zbinpdf)
+            # variance = np.sum((bin_centres**2)*zbinpdf) - mean**2
+            ganz_pdfs = np.column_stack((ganz_pdfs, zbinpdf2))
+    
     if GAMA == True:
         np.savetxt('/share/splinter/ug_hj/M101/GAMA_hist.dat', Gcsv, delimiter=',', fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
+        np.savetxt('/share/splinter/ug_hj/M101/GAMAannzpdf.dat', Gcsv, delimiter=',', fmt="%.4f, %.f, %.f, %.f, %.f, %.f, %.f, %.f, %.f, %.f")
 
     if GAMA != True:
         fl.close()
         fl2.close()
+        np.savetxt(dNdz_csv, DNDZ, delimiter=",", fmt="%.3f, %d, %d, %d, %d, %d, %d, %d, %d, %d")
+        for values in DNDZ:
+            writer3.writerow(values)
         fl3.close()
         # fig.tight_layout()
         # plt.savefig(out_img)
@@ -120,5 +130,5 @@ if __name__ == "__main__":
     out_csv = "/share/splinter/ug_hj/M101/PDF_Gauss1.csv"
     outdata_csv = "/share/splinter/ug_hj/M101/PDF_stack_dat"
     dNdz_csv = "/share/splinter/ug_hj/M101/PDF_dNdz.csv"
-    GAMA = False
+    GAMA = True
     stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA)
