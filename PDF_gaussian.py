@@ -120,5 +120,5 @@ if __name__ == "__main__":
     out_csv = "/share/splinter/ug_hj/M101/PDF_Gauss1.csv"
     outdata_csv = "/share/splinter/ug_hj/M101/PDF_stack_dat"
     dNdz_csv = "/share/splinter/ug_hj/M101/PDF_dNdz.csv"
-    GAMA = False
+    GAMA = True
     stack(in_catalog, out_img, out_csv, outdata_csv, dNdz_csv, GAMA)
